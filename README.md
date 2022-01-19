@@ -1,1 +1,1 @@
-# ezen-boiler-plate
+# spring-boot-boiler-plate
