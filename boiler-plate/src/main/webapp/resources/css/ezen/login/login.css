@@ -1,0 +1,66 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #eff0f2;
+}
+.login-wrap {
+  padding-bottom: 100px;
+}
+.login-box {
+  display: flex;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+.login-box-img {
+  position: relative;
+  width: 255px;
+  height: 494px;
+  background: url('/resources/images/logo/login_img.png');
+  background-position: center;
+  background-size: cover;
+}
+.login-box-img::before {
+  content: 'TEL.1877-0492';
+  position: absolute;
+  letter-spacing: 0.05em;
+  bottom: 165px;
+  left: 70px;
+  color: #fff;
+  font-weight: bold;
+}
+.login-box-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 540px;
+}
+.login-box-form form {
+  width: 100%;
+  padding: 0 2rem;
+}
+.btn-login {
+  font-size: 18px;
+  padding: 0.75em;
+}
+.btn-login,
+.btn-login:focus {
+  background-color: #0297d6;
+  border-color: #0297d6;
+}
+.btn-login:hover {
+  background-color: #2ebbf7;
+  border-color: #2ebbf7;
+}
+
+.logo-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-floating {
+  flex: 1;
+}

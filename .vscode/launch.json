@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BoilerPlateApplication<boiler-plate>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.ezen.boilerplate.BoilerPlateApplication",
+      "projectName": "boiler-plate",
+      "args": ""
+    }
+  ]
+}
