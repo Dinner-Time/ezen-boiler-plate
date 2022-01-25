@@ -18,5 +18,5 @@
   <!-- Util css, javascript -->
   <link rel="stylesheet" href="/resources/css/ezen/common.css" />
 
-  <title>Document</title>
+  <title>MES</title>
 </head>
