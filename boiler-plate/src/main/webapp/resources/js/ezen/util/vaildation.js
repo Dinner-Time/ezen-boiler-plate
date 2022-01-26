@@ -1,4 +1,9 @@
 /**
+ * @description 유효성 검사 기능 정의
+ * @author 박태훈
+ * @since 2022-01-25
+ */
+/**
  * @description 유효성 검사 function
  * @param {HTMLButtonElement} button
  */

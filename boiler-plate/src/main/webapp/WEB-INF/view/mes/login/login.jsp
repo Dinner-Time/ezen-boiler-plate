@@ -32,7 +32,7 @@
                   <img src="/resources/images/icon/ic_login.png" alt="" />
                 </span>
                 <div class="form-floating">
-                  <input type="text" id="userId" class="form-control" placeholder="아이디" aria-label="Username" data-vaildate-for="login" />
+                  <input type="text" name="userId" class="form-control" placeholder="아이디" data-vaildate-for="loginBtn" />
                   <label for="userId">아이디</label>
                 </div>
               </div>
@@ -43,7 +43,7 @@
                   <img src="/resources/images/icon/ic_pw.png" alt="" />
                 </span>
                 <div class="form-floating">
-                  <input type="password" id="password" class="form-control" placeholder="비밀번호" aria-label="Password" data-vaildate-for="login" />
+                  <input type="password" name="password" class="form-control" placeholder="비밀번호" data-vaildate-for="loginBtn" />
                   <label for="password">비밀번호</label>
                 </div>
               </div>
@@ -56,7 +56,7 @@
 
               <!-- 로그인 버튼 -->
               <div class="d-grid gap-2">
-                <button id="login" class="btn btn-primary btn-login" type="button">로그인</button>
+                <button id="loginBtn" class="btn btn-primary btn-login" type="button">로그인</button>
               </div>
             </form>
           </div>

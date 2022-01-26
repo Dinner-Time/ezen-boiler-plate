@@ -18,6 +18,8 @@ import { getDate } from '../util/date.js';
 window.onload = () => {
   // 로그인 form 선택
   const form = document.querySelector('#loginForm');
+  // 비구조화(로그인 버튼, 아이디 input, 비밀번호 input)
+  const { loginBtn, userId, password } = form;
 
   // 아이디 저장 여부 확인
   if (Cookie.getCookie(`ezen_saveId`)) {
@@ -25,7 +27,11 @@ window.onload = () => {
     form.userId.value = Cookie.getCookie(`ezen_saveId`);
   }
   // 로그인 버튼 이벤트 정의
-  document.querySelector('button#login').addEventListener('click', loginClickHandler);
+  loginBtn.addEventListener('click', loginClickHandler);
+
+  // 아이디, 비밀번호 입력 칸에서 enter키 입력시 로그인 실행
+  userId.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
+  password.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
 };
 
 /**
@@ -44,6 +50,16 @@ function loginClickHandler({ target }) {
 }
 
 /**
+ * @description 아이디, 패스워드 input에서 enter키 입력시 함수
+ * @param {Event} 이벤트 변수의 target
+ * @param {HTMLButtonElement} 로그인 버튼
+ */
+function inputEnterHandler({ key }, button) {
+  if (key !== 'Enter') return;
+  button.click();
+}
+
+/**
  * @description 아이디 저장 기능 구현
  * @param {HTMLFormElement} form element의 userId
  */
@@ -54,7 +70,7 @@ function saveId({ isSaveId, userId }) {
   if (isSaveId.checked) {
     expdate = getDate(30); // 30일
   } else {
-    expdate = getDate(-1); // 쿠키 삭제
+    expdate = getDate(-1); // 어제(쿠키 폐기 일자를 어제로 설정하기 때문에 쿠키 자동 폐기)
   }
   Cookie.setCookie(`ezen_saveId`, userId.value, expdate);
 }

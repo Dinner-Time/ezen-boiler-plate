@@ -1,3 +1,13 @@
+/*!
+ * 로그인 페이지 css
+ * 작성자 : 박태훈
+ * 작성일자 : 2022-01-25
+ */
+:root {
+  --ezen-tel: 'TEL.1877-0492';
+  --button-static-color: #0297d6;
+  --buttom-hover-color: #2ebbf7;
+}
 .login-page {
   display: flex;
   justify-content: center;
@@ -22,7 +32,7 @@
   background-size: cover;
 }
 .login-box-img::before {
-  content: 'TEL.1877-0492';
+  content: var(--ezen-tel);
   position: absolute;
   letter-spacing: 0.05em;
   bottom: 165px;
@@ -47,12 +57,12 @@
 }
 .btn-login,
 .btn-login:focus {
-  background-color: #0297d6;
-  border-color: #0297d6;
+  background-color: var(--button-static-color);
+  border-color: var(--button-static-color);
 }
 .btn-login:hover {
-  background-color: #2ebbf7;
-  border-color: #2ebbf7;
+  background-color: var(--buttom-hover-color);
+  border-color: var(--buttom-hover-color);
 }
 
 .logo-img {
