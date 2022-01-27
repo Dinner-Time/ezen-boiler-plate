@@ -46,7 +46,7 @@ dependencies {
 
 	// test 의존성
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.security:spring-security-test'	
+	testImplementation 'org.springframework.security:spring-security-test'	
 }
 
 test {

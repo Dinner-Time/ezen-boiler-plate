@@ -3,14 +3,26 @@ package com.ezen.boilerplate.mes.user.service.DTO;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.ezen.boilerplate.mes.user.domain.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
 public class LoginDTO implements UserDetails{
 
   private String userId;
   private String password;
+
+  @Builder
+  public LoginDTO(User entity){
+    this.userId = entity.getUserId();
+    this.password = entity.getPassword();
+  }
 
   // 로그인 ID
   @Override

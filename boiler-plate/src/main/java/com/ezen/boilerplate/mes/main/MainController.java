@@ -1,6 +1,9 @@
 package com.ezen.boilerplate.mes.main;
 
+import javax.servlet.http.HttpSession;
+
 import com.ezen.boilerplate.common.util.Pages;
+import com.ezen.boilerplate.mes.user.service.DTO.LoginDTO;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +31,11 @@ public class MainController {
 
   // 메인페이지
   @GetMapping("/")
-  public String main(Model model) 
+  public String main(Model model, HttpSession session) 
   {
+    if(session.getAttribute("user") != null){
+      System.out.println(((LoginDTO)session.getAttribute("user")).getUserId());
+    }
     model.addAttribute("responsePage", Pages.MAIN.getPage());
     return Pages.TEMPLATE.getPage();
   }

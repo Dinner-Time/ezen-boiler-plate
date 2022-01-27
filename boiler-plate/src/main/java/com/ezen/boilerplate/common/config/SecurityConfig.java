@@ -2,18 +2,16 @@ package com.ezen.boilerplate.common.config;
 
 import javax.sql.DataSource;
 
+import com.ezen.boilerplate.common.config.loginHandler.LoginSuccessHandler;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -36,9 +34,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  
-  @Autowired
-  UserDetailsService userDetailsService;
 
   @Autowired
   DataSource dataSource;
@@ -49,11 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-
-	}
 
   @Override
   public void configure(WebSecurity web) throws Exception {
@@ -63,7 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()  // 접근 권한 설정
+        http.csrf()
+                .disable()
+                .authorizeRequests()  // 접근 권한 설정
                 .antMatchers("/login/**").permitAll()  // 로그인 페이지는 모두 접속 가능하도록
                 .antMatchers("/error").permitAll()  // 에러 페이지 
                 .antMatchers("/**").authenticated()
@@ -73,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("userId")  // username parameter custom
                 .passwordParameter("password")  // password parameter custom
                 .loginProcessingUrl("/login/process") // login을 실행할 URL
-                .defaultSuccessUrl("/")  // 로그인 성공시 이동할 페이지
+                .successHandler(new LoginSuccessHandler())
                 .failureUrl("/login?error=true")  // 로그인 실패시 이동할 페이지
             .and()
                 .logout() // 로그아웃
@@ -82,19 +74,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)  // 세션 종료
             .and()
                 .exceptionHandling().accessDeniedPage("/login/denied")
-            // 아이디 저장 설정
-            .and()
-                .rememberMe()
-                .tokenRepository(this.persistentTokenRepository())
-                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24시간
+            ;
+            // // 아이디 저장 설정
+            // .and()
+            //     .rememberMe()
+            //     .tokenRepository(this.persistentTokenRepository())
+            //     .tokenValiditySeconds(1 * 24 * 60 * 60); // 24시간
     }
 
-    // 아이디 저장 여부를 서버 memory에 저장
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-      InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
-      return memory;
-    }
+    // // 아이디 저장 여부를 서버 memory에 저장
+    // @Bean
+    // public PersistentTokenRepository persistentTokenRepository() {
+    //   InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
+    //   return memory;
+    // }
 
     // 아이디 저장 여부를 DB에 저장
     // @Bean

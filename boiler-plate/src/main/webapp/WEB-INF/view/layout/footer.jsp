@@ -1,2 +1,5 @@
-<hr />
-<h1>footer</h1>
+<footer class="footer ezen-footer mt-auto py-3">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
