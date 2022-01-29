@@ -48,8 +48,8 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 33, 37, 41;
   --bs-body-bg-rgb: 255, 255, 255;
-  --bs-font-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --bs-font-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
@@ -2287,8 +2287,10 @@ progress {
   border-width: 0;
   border-inline-end-width: 1px;
   border-radius: 0;
-  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 .form-control::file-selector-button {
   padding: 0.375rem 0.75rem;
@@ -2303,7 +2305,8 @@ progress {
   border-width: 0;
   border-inline-end-width: 1px;
   border-radius: 0;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control::-webkit-file-upload-button {
@@ -2333,8 +2336,10 @@ progress {
   border-width: 0;
   border-inline-end-width: 1px;
   border-radius: 0;
-  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control::-webkit-file-upload-button {
@@ -2839,7 +2844,8 @@ textarea.form-control-lg {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+.input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
   margin-left: -1px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -3070,7 +3076,8 @@ textarea.form-control.is-invalid {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -4001,14 +4008,14 @@ fieldset:disabled .btn {
 }
 .dropdown-item:hover,
 .dropdown-item:focus {
-  color: #1e2125;
-  background-color: #e9ecef;
+  color: #fff;
+  background-color: #0297d6;
 }
 .dropdown-item.active,
 .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #0d6efd;
+  background-color: #0297d6;
 }
 .dropdown-item.disabled,
 .dropdown-item:disabled {
@@ -4920,8 +4927,8 @@ fieldset:disabled .btn {
   border: 0;
   border-radius: 0;
   overflow-anchor: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
-    border-radius 0.15s ease;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
 }
 @media (prefers-reduced-motion: reduce) {
   .accordion-button {
@@ -5051,7 +5058,8 @@ fieldset:disabled .btn {
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #dee2e6;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .page-link {

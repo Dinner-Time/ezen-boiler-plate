@@ -18,7 +18,9 @@
 
     <!-- main -->
     <!-- URL에 따라 동적으로 변하는 페이지를 정의한다. -->
-    <c:import url="/WEB-INF/view/${responsePage}.jsp" charEncoding="UTF-8"></c:import>
+    <main class="container">
+      <c:import url="/WEB-INF/view/${responsePage}.jsp" charEncoding="UTF-8"></c:import>
+    </main>
   </body>
 
   <!-- footer -->

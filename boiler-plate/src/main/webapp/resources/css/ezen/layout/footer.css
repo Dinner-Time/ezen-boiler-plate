@@ -1,0 +1,4 @@
+.ezen-footer {
+  border: 1px solid var(--header-footer-border-color);
+  background-color: var(--header-footer-color);
+}

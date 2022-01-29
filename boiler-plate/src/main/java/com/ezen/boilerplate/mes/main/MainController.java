@@ -33,9 +33,9 @@ public class MainController {
   @GetMapping("/")
   public String main(Model model, HttpSession session) 
   {
-    if(session.getAttribute("user") != null){
-      System.out.println(((LoginDTO)session.getAttribute("user")).getUserId());
-    }
+    // if(session.getAttribute("user") != null){
+    //   System.out.println(((LoginDTO)session.getAttribute("user")).getUserId());
+    // }
     model.addAttribute("responsePage", Pages.MAIN.getPage());
     return Pages.TEMPLATE.getPage();
   }

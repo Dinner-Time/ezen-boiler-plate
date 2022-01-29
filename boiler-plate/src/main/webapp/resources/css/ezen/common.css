@@ -4,62 +4,23 @@
   --header-footer-color: #f6f6f6;
   --header-footer-border-color: #eeeeee;
 }
+
 body {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
-
-.ezen-header {
-  display: flex;
-  justify-content: space-between;
-  width: 100vw;
-  height: 34px;
-  border-bottom: 1px solid var(--header-footer-border-color);
-  background-color: var(--header-footer-color);
+.ezen-dropdown {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: #fff !important;
 }
-
-.ezen-header .btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0;
-}
-
-.ezen-header .ezen-toggle-menu {
-  background-color: var(--primary-color);
-}
-.ezen-header .ezen-toggle-menu:hover {
-  background-color: var(--primary-hover-color);
-}
-
-.ezen-header .ezen-user {
-  display: flex;
-  height: 100%;
-  margin-right: 0.75em;
-}
-
-.ezen-header .ezen-user .ezen-user-info {
-  height: 100%;
-  font-size: 14px;
-}
-.ezen-header .ezen-user .ezen-user-info img {
-  margin-right: 0.5em;
-}
-.ezen-header .ezen-user .ezen-user-info:hover {
-  cursor: pointer;
-  color: #fff;
-  background-color: var(--primary-color);
-}
-.ezen-header .ezen-user .ezen-user-info:hover img {
-  content: url('/resources/images/icon/ico_user_hover.png');
-}
-.ezen-header .ezen-user .ezen-user-info:hover a {
-  color: #fff;
-}
-
-.ezen-footer {
-  border: 1px solid var(--header-footer-border-color);
-  background-color: var(--header-footer-color);
+.ezen-dropdown:hover,
+.ezen-dropdown:focus,
+.ezen-dropdown:active {
+  color: var(--primary-hover-color) !important;
+  border-color: var(--primary-hover-color) !important;
+  background-color: #fff !important;
 }
