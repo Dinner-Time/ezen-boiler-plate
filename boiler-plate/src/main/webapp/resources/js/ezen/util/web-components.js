@@ -1,6 +1,6 @@
-'use strict';
+'use strict'; // 엄격 모드 실행
 
-export class ExampleWebComponent extends HTMLElement {
+class ExampleWebComponent extends HTMLElement {
   constructor() {
     // 클래스 초기화. 속성이나 하위 노드는 접근할 수는 없다.
     super();
@@ -71,6 +71,20 @@ export class EzenSelect extends HTMLElement {
 
     // dropdown 클릭 이벤트 추가
     this.setDropdowClickHandler();
+
+    /**
+     * dropdown에 변경사항이 있을 경우 해당 변경사항이 select태그에도 적용되어야 한다.
+     * 이를 구현하기 위해 mutation observer를 사용한다.
+     */
+    const observer = new MutationObserver(() => {
+      const selectedValue = this.querySelector('.active').dataset.value;
+      this.selectProps.tag.value = selectedValue;
+    });
+
+    // 화면에 보이는 select 태그의 내용이 변경될때 observer 실행
+    observer.observe(this.dropdownProps.selected, {
+      childList: true,
+    });
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
@@ -78,6 +92,9 @@ export class EzenSelect extends HTMLElement {
     this[attrName] = newVal;
   }
 
+  /**
+   * 실제로 controller에 값을 넘기는 역할을 해줄 select태그 생성
+   */
   makeSelectTag() {
     // 태그 생성시 부여한 name과 id
     const { name, id } = this;
@@ -106,11 +123,10 @@ export class EzenSelect extends HTMLElement {
       options: select.querySelectorAll('option'),
     };
   }
-
+  /**
+   * 화면에 보일 dropdown 생성
+   */
   makeDropdown() {
-    /**
-     * 화면에 보일 dropdown 생성
-     */
     const dropdown = document.createElement('div');
     dropdown.classList.add('dropdown'); // style적용을 위한 class 부여
 
@@ -146,6 +162,7 @@ export class EzenSelect extends HTMLElement {
       const dropdownATag = document.createElement('a');
       dropdownATag.href = '#';
       dropdownATag.classList.add('dropdown-item');
+      dropdownATag.dataset.value = option.value;
       dropdownATag.innerHTML = option.innerHTML;
 
       dropdownLiTag.appendChild(dropdownATag);
@@ -161,21 +178,30 @@ export class EzenSelect extends HTMLElement {
     this.dropdownProps = {
       wrap: dropdown,
       selected: selected,
-      options: dropdown.querySelectorAll('ul li'),
+      options: dropdown.querySelectorAll('ul li a'),
     };
   }
 
+  /**
+   * dropdown 클릭시 이벤트 정의
+   */
   setDropdowClickHandler() {
     const { selected, options } = this.dropdownProps;
 
+    // option에 해당하는 태그 클릭시 active class를 toggle한다.
     [...options].forEach((option) => {
       option.addEventListener('click', (e) => {
         const { target } = e;
 
-        const actived = target.closest('ul').querySelector('.active');
+        // active class를 가진 태그가 있다면 active class 제거
+        const actived = this.querySelector('.active');
+        // const actived = target.closest('ul').querySelector('.active');
         if (actived) actived.classList.remove('active');
 
+        // 현재 클릭한 태그에 active class 추가
         target.classList.add('active');
+
+        // 화면에 보이는 dropdown의 내용을 클릭한 태그의 내용으로 설정
         selected.innerHTML = target.innerHTML;
       });
     });
