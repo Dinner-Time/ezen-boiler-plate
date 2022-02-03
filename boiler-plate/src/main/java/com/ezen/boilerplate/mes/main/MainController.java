@@ -2,11 +2,12 @@ package com.ezen.boilerplate.mes.main;
 
 import javax.servlet.http.HttpSession;
 
-import com.ezen.boilerplate.common.util.Pages;
+import com.ezen.boilerplate.mes.menu.service.DTO.MenuDTO;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 
@@ -28,15 +29,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
+  private final String TEMPLATE = "layout/template";
+
   // 메인페이지
   @GetMapping("/")
-  public String main(Model model, HttpSession session) 
+  public String main(Model model) 
   {
-    // if(session.getAttribute("user") != null){
-    //   System.out.println(((LoginDTO)session.getAttribute("user")).getUserId());
-    // }
-    model.addAttribute("responsePage", Pages.MAIN.getPage());
-    return Pages.TEMPLATE.getPage();
+    model.addAttribute("responsePage", "mes/main");
+    return TEMPLATE;
   }
 
+  @GetMapping("/mes/{pageNo}")
+  public String page(Model model, HttpSession session, String pageLink, @PathVariable("pageNo") String pageNo){
+    // TODO: db에 저장된 메뉴 정보 query
+    
+    MenuDTO menu = new MenuDTO();
+    menu.setParentMenu("기준정보관리");
+    menu.setChildMenu("공통관리");
+    menu.setChildMenuNo(pageNo);
+
+    session.setAttribute("menu", menu);
+    model.addAttribute("responsePage", pageLink);
+    return TEMPLATE;
+  }
 }

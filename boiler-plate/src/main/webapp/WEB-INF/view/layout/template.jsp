@@ -18,8 +18,10 @@
 
     <!-- main -->
     <!-- URL에 따라 동적으로 변하는 페이지를 정의한다. -->
-    <main class="container">
-      <c:import url="/WEB-INF/view/${responsePage}.jsp" charEncoding="UTF-8"></c:import>
+    <main>
+      <div class="content-wrapper">
+        <c:import url="/WEB-INF/view/${responsePage}.jsp" charEncoding="UTF-8"></c:import>
+      </div>
     </main>
   </body>
 

@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 .vscode
+node_modules
 application.properties
 build/
 !gradle/wrapper/gradle-wrapper.jar

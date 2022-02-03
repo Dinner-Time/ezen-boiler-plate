@@ -79,6 +79,11 @@ export class EzenSelect extends HTMLElement {
     const observer = new MutationObserver(() => {
       const selectedValue = this.querySelector('.active').dataset.value;
       this.selectProps.tag.value = selectedValue;
+
+      // select의 값이 변경되었을때 실행할 함수
+      if (this.change) {
+        this.change();
+      }
     });
 
     // 화면에 보이는 select 태그의 내용이 변경될때 observer 실행
@@ -205,5 +210,64 @@ export class EzenSelect extends HTMLElement {
         selected.innerHTML = target.innerHTML;
       });
     });
+  }
+
+  setChangeHandler(func) {
+    this.change = func;
+  }
+}
+
+/**
+ * menu navigaion 태그
+ */
+export class MenuNavigation extends HTMLElement {
+  constructor() {
+    // 클래스 초기화. 속성이나 하위 노드는 접근할 수는 없다.
+    super();
+  }
+  static get observedAttributes() {
+    // 모니터링 할 속성 이름
+    // <tag-name example="example"></tag-name>
+    return ['parent', 'child'];
+  }
+  connectedCallback() {
+    // DOM에 추가되었다. 렌더링 등의 처리를 하자.
+    this.render();
+
+    // head의 title변경
+    document.querySelector('head title').innerHTML = this.child;
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal) {
+    // 속성이 추가/제거/변경되었다.
+    this[attrName] = newVal;
+  }
+
+  render() {
+    const wrap = document.createElement('div');
+    wrap.classList.add('d-flex');
+    wrap.classList.add('justify-content-between');
+    wrap.classList.add('align-items-center');
+
+    const title = document.createElement('span');
+    title.classList.add('ezen-title');
+    title.innerHTML = this.child;
+
+    const navWrap = document.createElement('span');
+    navWrap.classList.add('menu-navigation');
+
+    const home = document.createElement('span');
+    home.classList.add('menu-navigation-home');
+
+    const parentMenu = document.createElement('span');
+    parentMenu.innerHTML = this.parent;
+
+    const childMenu = document.createElement('span');
+    childMenu.innerHTML = this.child;
+
+    navWrap.append(home, parentMenu, childMenu);
+
+    wrap.append(title, navWrap);
+    this.append(wrap);
   }
 }
