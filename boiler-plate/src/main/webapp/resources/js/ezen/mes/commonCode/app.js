@@ -1,37 +1,20 @@
 import { EzenSelect } from '../../util/web-components.js';
+import { vaildateRequestData, checkLimitText } from '../../util/vaildation.js';
+import { grid, detailGrid } from './grid/grid.js';
+
+/**
+ * select web-component 적용 시
+ *  define하기 전에 tag에 대한 DOM 작업을 끝마쳐야 제대로 적용된다.
+ */
+const ezenSelect = document.querySelector('ezen-select');
+for (let i = 0; i < 4; i++) {
+  const option = document.createElement('option');
+  option.value = i + 1;
+  option.innerHTML = `test${i + 1}`;
+
+  ezenSelect.appendChild(option);
+}
 customElements.define('ezen-select', EzenSelect);
 
-const grid = new tui.Grid({
-  el: document.querySelector('#grid'),
-  columns: [
-    { header: '코드ID', name: 'codeId', width: 200, align: 'center', sortable: true },
-    { header: '코드ID명', name: 'codeIdNm', align: 'center', sortable: true },
-    { header: '코드설명', name: 'codeIdDc', hidden: true },
-    { header: '사용여부', name: 'useAt', hidden: true },
-  ],
-  data: [
-    {
-      codeId: 'MES001',
-      codeIdNm: 'MES001',
-    },
-  ],
-  bodyHeight: 580,
-  rowHeight: 30,
-});
-const detailGrid = new tui.Grid({
-  el: document.querySelector('#detailGrid'),
-  columns: [
-    { header: '코드ID', name: 'codeId', width: 200, align: 'center', sortable: true },
-    { header: '코드ID명', name: 'codeIdNm', align: 'center', sortable: true },
-    { header: '코드설명', name: 'codeIdDc' },
-    { header: '사용여부', name: 'useAt' },
-  ],
-  data: [
-    {
-      codeId: 'MES001',
-      codeIdNm: 'MES001',
-    },
-  ],
-  bodyHeight: 545,
-  rowHeight: 30,
-});
+// 글자 수 제한
+checkLimitText(document.querySelector('textarea'), 60);
