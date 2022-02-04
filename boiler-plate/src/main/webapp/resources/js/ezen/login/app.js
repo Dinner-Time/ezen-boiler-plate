@@ -40,7 +40,7 @@ window.onload = () => {
  */
 function loginClickHandler({ target }) {
   // 유효성 검사 실행
-  if (!vaildateRequestData(target)) return;
+  if (!vaildateRequestData(target.id)) return;
   // 로그인 form 선택
   const form = document.querySelector('#loginForm');
   // id 저장

@@ -1,5 +1,13 @@
+/**
+ * @description custom html elements 정의
+ * @author 박태훈
+ * @since 2022-01-25
+ */
 'use strict'; // 엄격 모드 실행
 
+/**
+ * web component 예시
+ */
 class ExampleWebComponent extends HTMLElement {
   constructor() {
     // 클래스 초기화. 속성이나 하위 노드는 접근할 수는 없다.
@@ -51,18 +59,15 @@ class ExampleWebComponent extends HTMLElement {
  */
 export class EzenSelect extends HTMLElement {
   constructor() {
-    // 클래스 초기화. 속성이나 하위 노드는 접근할 수는 없다.
     super();
   }
 
   static get observedAttributes() {
     // 모니터링 할 속성 이름
-    // <tag-name example="example"></tag-name>
     return ['name'];
   }
 
   connectedCallback() {
-    // DOM에 추가되었다. 렌더링 등의 처리를 하자.
     // select tag 생성
     this.makeSelectTag();
 
@@ -93,7 +98,6 @@ export class EzenSelect extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    // 속성이 추가/제거/변경되었다.
     this[attrName] = newVal;
   }
 
@@ -127,6 +131,10 @@ export class EzenSelect extends HTMLElement {
       tag: select,
       options: select.querySelectorAll('option'),
     };
+
+    // 해당 태그의 id, name 삭제
+    this.removeAttribute('id');
+    this.removeAttribute('name');
   }
   /**
    * 화면에 보일 dropdown 생성
@@ -212,8 +220,23 @@ export class EzenSelect extends HTMLElement {
     });
   }
 
+  /**
+   * @description 값 변경시 호출할 이벤트
+   * @param {Function} func 실행할 함수
+   */
   setChangeHandler(func) {
     this.change = func;
+  }
+
+  /**
+   * @description 값 변경 함수
+   *    data-value가 parameter와 같은 dropdown을 찾아서 해당 요소 클릭
+   * @param {*} value
+   */
+  setValue(value) {
+    [...this.dropdownProps.options].forEach((option) => {
+      option.dataset.value === value ? option.click() : '';
+    });
   }
 }
 
@@ -222,16 +245,13 @@ export class EzenSelect extends HTMLElement {
  */
 export class MenuNavigation extends HTMLElement {
   constructor() {
-    // 클래스 초기화. 속성이나 하위 노드는 접근할 수는 없다.
     super();
   }
   static get observedAttributes() {
-    // 모니터링 할 속성 이름
-    // <tag-name example="example"></tag-name>
     return ['parent', 'child'];
   }
   connectedCallback() {
-    // DOM에 추가되었다. 렌더링 등의 처리를 하자.
+    // 태그를 만들어서 붙여주는 작업을 한다.
     this.render();
 
     // head의 title변경
@@ -239,7 +259,6 @@ export class MenuNavigation extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    // 속성이 추가/제거/변경되었다.
     this[attrName] = newVal;
   }
 

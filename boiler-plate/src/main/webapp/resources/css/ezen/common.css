@@ -14,6 +14,7 @@ body {
   overflow: hidden;
 }
 main {
+  min-width: 1460px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -166,13 +167,32 @@ menu-navigation .menu-navigation .menu-navigation-home::before {
   border-bottom-color: var(--primary-color);
 }
 
+/* vaildation style */
+label.ezen-required::after {
+  content: '*';
+  color: blue;
+  margin-left: 0.15em;
+}
+
 /* sizing */
+.w-250,
+.w-200,
 .w-150,
+.w-100,
 .w-80 {
   min-width: 0px !important;
 }
+.w-250 {
+  width: 250px !important;
+}
+.w-200 {
+  width: 200px !important;
+}
 .w-150 {
   width: 150px !important;
+}
+.w-100 {
+  width: 100px !important;
 }
 .w-80 {
   width: 80px !important;

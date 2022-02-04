@@ -11,15 +11,15 @@
   <div class="row py-1">
     <!-- col -->
     <div class="col-6 d-flex align-items-center">
-      <label for="code">그룹코드</label>
-      <ezen-select id="code" name="code"></ezen-select>
+      <label for="codeGroup">그룹코드</label>
+      <ezen-select id="codeGroup" name="codeGroup"></ezen-select>
     </div>
     <!-- col -->
 
     <!-- col -->
     <div class="col-6 d-flex justify-content-end">
-      <button type="button" class="btn btn-outline-primary ezen-btn ezen-btn-new">신규</button>
-      <button type="button" class="btn btn-outline-primary ezen-btn ezen-btn-save">저장</button>
+      <button type="button" id="newBtn" class="btn btn-outline-primary ezen-btn ezen-btn-new">신규</button>
+      <button type="button" id="saveBtn" class="btn btn-outline-primary ezen-btn ezen-btn-save">저장</button>
     </div>
     <!-- col -->
   </div>
@@ -104,47 +104,49 @@
 
         <!-- 코드 상세 정보 -->
         <div class="tab-pane fade" id="code-info" role="tabpanel" aria-labelledby="code-info-tab">
-          <table class="table mt-3">
-            <colgroup>
-              <col width="100px" />
-              <col />
-            </colgroup>
-            <thead></thead>
-            <!-- 코드 상세 설명 -->
-            <tbody>
-              <tr>
-                <th scope="row"><label for="">코드 ID</label></th>
-                <td><input type="text" class="form-control ezen-input-text w-150" /></td>
-              </tr>
+          <form id="codeDataForm">
+            <table class="table mt-3">
+              <colgroup>
+                <col width="100px" />
+                <col />
+              </colgroup>
+              <thead></thead>
+              <!-- 코드 상세 설명 -->
+              <tbody>
+                <tr>
+                  <th scope="row"><label for="codeId">코드 ID</label></th>
+                  <td><input type="text" id="codeId" name="codeId" class="form-control ezen-input-text w-150" data-vaildate-for="saveBtn" /></td>
+                </tr>
 
-              <tr>
-                <th scope="row"><label for="">코드명</label></th>
-                <td><input type="text" class="form-control ezen-input-text w-150" /></td>
-              </tr>
+                <tr>
+                  <th scope="row"><label for="codeIdNm">코드명</label></th>
+                  <td><input type="text" id="codeIdNm" name="codeIdNm" class="form-control ezen-input-text w-250" data-vaildate-for="saveBtn" /></td>
+                </tr>
 
-              <tr>
-                <th scope="row"><label for="">코드설명</label></th>
-                <td>
-                  <div class="form-floating">
-                    <textarea class="form-control ezen-input-text" id="codeDescription" rows="2" style="resize: none"></textarea>
-                  </div>
-                </td>
-              </tr>
+                <tr>
+                  <th scope="row"><label for="codeDesc">코드설명</label></th>
+                  <td>
+                    <div class="form-floating">
+                      <textarea class="form-control ezen-input-text" id="codeDesc" name="codeDesc" rows="2" style="resize: none"></textarea>
+                    </div>
+                  </td>
+                </tr>
 
-              <tr>
-                <th scope="row">
-                  <label for="">사용여부</label>
-                </th>
-                <td>
-                  <ezen-select name="useYn" id="useYn">
-                    <option value="1">사용</option>
-                    <option value="0">미사용</option>
-                  </ezen-select>
-                </td>
-              </tr>
-            </tbody>
-            <!-- 코드 상세 설명 -->
-          </table>
+                <tr>
+                  <th scope="row">
+                    <label for="useYn">사용여부</label>
+                  </th>
+                  <td>
+                    <ezen-select name="useYn" id="useYn">
+                      <option value="1">사용</option>
+                      <option value="0">미사용</option>
+                    </ezen-select>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- 코드 상세 설명 -->
+            </table>
+          </form>
         </div>
         <!-- 코드 상세 정보 -->
       </div>
