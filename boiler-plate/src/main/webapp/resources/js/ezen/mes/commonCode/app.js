@@ -10,7 +10,7 @@
 // 유효성 검사
 import { setValidationStyle, vaildateRequestData, checkLimitText } from '../../util/vaildation.js';
 // 초기화 function
-import { initializeEzenSelect } from '../../util/initializations.js';
+import { initializeEzenSelect, initializeTextLimit } from '../../util/initializations.js';
 
 // 그리드
 import { grid, detailGrid } from './grid/grid.js';
@@ -75,4 +75,5 @@ newBtn.addEventListener('click', () => {
   codeDataForm.codeId.removeAttribute('readonly'); // 코드 정보 form의 readonly 삭제
 
   initializeEzenSelect({ codeGroup: 'MES', useYn: '1' }); // custom select 초기화
+  initializeTextLimit(codeDataForm.codeDesc); // 텍스트 제한 element 초기화
 });

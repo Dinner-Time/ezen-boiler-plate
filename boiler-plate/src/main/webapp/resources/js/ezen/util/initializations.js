@@ -19,4 +19,13 @@ function initializeEzenSelect(initConditions) {
   });
 }
 
-export { initializeEzenSelect };
+/**
+ * @description 텍스트 입력 제한이 걸려있는 element 초기화
+ * @param {HTMLElement} textLimitedElem
+ */
+function initializeTextLimit(textLimitedElem) {
+  textLimitedElem.classList.remove('is-invalid'); // is-invalid class 삭제
+  textLimitedElem.parentElement.querySelector('.input-text-size').innerHTML = '0'; // 현재 텍스트 초기화
+}
+
+export { initializeEzenSelect, initializeTextLimit };

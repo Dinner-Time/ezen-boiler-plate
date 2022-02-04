@@ -41,7 +41,7 @@ function vaildateRequestData(vaildateFor) {
   // 예외 처리 진행
   try {
     // isInvalid 확인
-    if (isInvalid.length > 1) {
+    if (isInvalid.length > 0) {
       isInvalid[0].focus();
       throw ErrorMessage.INVALID;
     }
@@ -50,7 +50,7 @@ function vaildateRequestData(vaildateFor) {
     [...dataList].forEach((elem) => {
       let { value } = elem; // 비구조화(value)
 
-      const falsyWithOutZero = value || Number(value) == 0;
+      const falsyWithOutZero = value || String(value) === '0';
 
       if (
         !falsyWithOutZero || // 0을 제외한 falsy(null, undefined, NaN, '', false)확인
