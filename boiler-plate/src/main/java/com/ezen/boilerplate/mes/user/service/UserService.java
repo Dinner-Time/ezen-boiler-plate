@@ -13,13 +13,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
   private final UserRepository userRepository;
 
   @Override
   public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-    System.out.println("============== load user ===========");
     User user = userRepository.findByUserId(userId);
     LoginDTO loginUser = new LoginDTO(user);
     return loginUser;

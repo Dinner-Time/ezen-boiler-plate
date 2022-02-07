@@ -2,6 +2,9 @@
 <!-- -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- script -->
+<script type="module" src="/resources/js/ezen/mes/commonCode/app.js" defer></script>
+
 <!-- navigation -->
 <menu-navigation parent="${sessionScope.menu.parentMenu}" child="${sessionScope.menu.childMenu}"></menu-navigation>
 
@@ -154,4 +157,3 @@
     </div>
   </div>
 </div>
-<script type="module" src="/resources/js/ezen/mes/commonCode/app.js" defer></script>
