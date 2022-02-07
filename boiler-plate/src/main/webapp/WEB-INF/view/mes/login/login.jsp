@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/resources/css/ezen/login/login.css" />
   <!-- login js -->
   <script type="module" src="/resources/js/ezen/login/app.js" defer></script>
+
   <body>
     <div class="login-page">
       <div class="login-wrap">
@@ -64,4 +65,6 @@
       </div>
     </div>
   </body>
+
+  <span id="checkError" data-error="${error}"></span>
 </html>

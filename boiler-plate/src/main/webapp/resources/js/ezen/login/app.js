@@ -14,26 +14,34 @@ import Cookie from '../util/cookie.js';
 // 날짜 util
 import { getDate } from '../util/date.js';
 
-// 화면 로딩 끝난 이후
-window.onload = () => {
-  // 로그인 form 선택
-  const form = document.querySelector('#loginForm');
-  // 비구조화(로그인 버튼, 아이디 input, 비밀번호 input)
-  const { loginBtn, userId, password } = form;
+/**
+ * 로그인 실패 시 처리
+ */
+loginFailureHandler(document.querySelector('#checkError').dataset.error);
 
-  // 아이디 저장 여부 확인
-  if (Cookie.getCookie(`ezen_saveId`)) {
-    form.isSaveId.checked = true;
-    form.userId.value = Cookie.getCookie(`ezen_saveId`);
-  }
-  // 로그인 버튼 이벤트 정의
-  loginBtn.addEventListener('click', loginClickHandler);
+/**
+ * DOM 선택
+ */
+const form = document.querySelector('#loginForm'); // 로그인 form 선택
+const { loginBtn, userId, password } = form; // 비구조화(로그인 버튼, 아이디 input, 비밀번호 input)
 
-  // 아이디, 비밀번호 입력 칸에서 enter키 입력시 로그인 실행
-  userId.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
-  password.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
-};
+/**
+ * 아이디 저장 여부 확인
+ */
+if (Cookie.getCookie(`ezen_saveId`)) {
+  form.isSaveId.checked = true;
+  form.userId.value = Cookie.getCookie(`ezen_saveId`);
+}
 
+/**
+ * 로그인 버튼 클릭 이벤트 정의
+ */
+loginBtn.addEventListener('click', loginClickHandler);
+// 아이디, 비밀번호 입력 칸에서 enter키 입력시 로그인 실행
+userId.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
+password.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
+
+// ============================== function 정의 ==============================
 /**
  * @description 로그인 버튼 클릭시 실행할 function
  * @param {Event} 이벤트 변수의 target
@@ -83,4 +91,13 @@ function sendRequest(form) {
   form.action = PROCCESS_LOGIN;
   form.method = RequestMethod.POST;
   form.submit();
+}
+
+/**
+ * @description 로그인 실패 처리 함수
+ * @param {String} message
+ */
+function loginFailureHandler(message) {
+  if (!message) return;
+  toastr.error(message);
 }

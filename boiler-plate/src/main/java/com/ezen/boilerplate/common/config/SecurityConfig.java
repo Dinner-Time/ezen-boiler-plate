@@ -2,6 +2,7 @@ package com.ezen.boilerplate.common.config;
 
 import javax.sql.DataSource;
 
+import com.ezen.boilerplate.common.config.loginHandler.LoginFailureHandler;
 import com.ezen.boilerplate.common.config.loginHandler.LoginSuccessHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
-                .disable()
+                .disable()  // csrf 미적용
                 .authorizeRequests()  // 접근 권한 설정
                 .antMatchers("/login/**").permitAll()  // 로그인 페이지는 모두 접속 가능하도록
                 .antMatchers("/error").permitAll()  // 에러 페이지 
@@ -66,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")  // password parameter custom
                 .loginProcessingUrl("/login/process") // login을 실행할 URL
                 .successHandler(new LoginSuccessHandler())
-                .failureUrl("/login?error=true")  // 로그인 실패시 이동할 페이지
+                .failureHandler(new LoginFailureHandler())
+                // .failureUrl("/login?error=true")  // 로그인 실패시 이동할 페이지
             .and()
                 .logout() // 로그아웃
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 실행 URL

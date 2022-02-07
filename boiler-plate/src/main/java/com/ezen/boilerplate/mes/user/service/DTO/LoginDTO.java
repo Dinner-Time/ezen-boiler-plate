@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class LoginDTO implements UserDetails{
 
   private String userId;
