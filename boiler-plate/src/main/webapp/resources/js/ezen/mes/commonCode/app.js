@@ -14,6 +14,7 @@ import { initializeEzenSelect, initializeTextLimit } from '../../util/initializa
 
 import { keyUpEnterHandler } from '../../util/event-handlers.js';
 
+import { formToJson } from '../../util/form-util.js';
 // 그리드
 import { grid, detailGrid } from './grid/grid.js';
 // API 호출
@@ -76,7 +77,27 @@ function saveChildrenCode(e) {
 // 코드 정보 저장
 function saveCodeInfo(e) {
   const { target } = e;
-  vaildateRequestData(target.id); // 유효성 검사 이후 저장 실행
+  if (!vaildateRequestData(target.id)) return; // 유효성 검사 이후 저장 실행
+  const moreRequest = {
+    parentCode: document.querySelector('#codeGroup').value,
+  };
+
+  const requestData = { ...formToJson(codeDataForm), ...moreRequest };
+
+  fetch('/mes/commonCode/save/master', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(requestData),
+  })
+    .then((data) => data.json())
+    .then((data) => {
+      if (data === 1) {
+        window.location.reload();
+      }
+    })
+    .catch((err) => console.log(err));
 }
 
 /**

@@ -20,14 +20,14 @@ function loadCodeData(form, row) {
    * form태그를 비구조화 할 시
    *  name 또는 id를 키로 element(input, select, checkbox, radio, button)를 찾아온다.
    */
-  const { codeId, codeIdNm, codeDesc, useYn } = form;
+  const { codeId, codeNm, codeDesc, isEnabled } = form;
 
   [codeId, codeNm, codeDesc, isEnabled].forEach((elem) => {
     const { name } = elem;
 
     switch (name) {
-      case 'useYn': {
-        elem.closest('ezen-select').setValue(row[name]); // custom select의 값 변경 함수 호출
+      case 'isEnabled': {
+        elem.closest('ezen-select').setValue(String(row[name])); // custom select의 값 변경 함수 호출
         break;
       }
       case 'codeId': {
