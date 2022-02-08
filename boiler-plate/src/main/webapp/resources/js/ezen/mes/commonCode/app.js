@@ -12,6 +12,8 @@ import { setValidationStyle, vaildateRequestData, checkLimitText } from '../../u
 // 초기화 function
 import { initializeEzenSelect, initializeTextLimit } from '../../util/initializations.js';
 
+import { keyUpEnterHandler } from '../../util/event-handlers.js';
+
 // 그리드
 import { grid, detailGrid } from './grid/grid.js';
 // API 호출
@@ -23,6 +25,8 @@ import { loadCodeListByGroup, loadChildrenCodes, loadCodeData } from './data-fet
 const codeDataForm = document.querySelector('#codeDataForm'); // 코드 정보 form
 const saveBtn = document.querySelector('#saveBtn'); // 저장 버튼
 const newBtn = document.querySelector('#newBtn'); // 신규 버튼
+const searchCodeNmKeyword = document.querySelector('#searchCodeNmKeyword'); // 검색 keyword
+const searchCodeNmBtn = document.querySelector('#searchCodeNmBtn'); // 검색 버튼
 
 /**
  * 화면 로드 이후 바로 호출하는 함수
@@ -30,6 +34,16 @@ const newBtn = document.querySelector('#newBtn'); // 신규 버튼
 setValidationStyle(saveBtn.id); // 유효성 검사가 필요한 태그 style
 checkLimitText(codeDataForm.codeDesc, 60); // 글자 수 제한 style 및 기능
 loadCodeListByGroup(grid); // 그룹 코드 load 및 선택한 그룹 코드에 해당하는 코드 목록 load
+
+/**
+ * 코드 명 검색
+ */
+searchCodeNmBtn.addEventListener('click', () => {
+  const data = grid.savedData;
+  const filtered = data.filter((elem) => elem.codeNm.includes(searchCodeNmKeyword.value.trim()));
+  grid.resetData(filtered);
+});
+searchCodeNmKeyword.addEventListener('keyup', (e) => keyUpEnterHandler(e, searchCodeNmBtn));
 
 /**
  * 코드 목록 그리드 클릭 이벤트 정의
@@ -69,11 +83,10 @@ function saveCodeInfo(e) {
  * 초기화 기능 구현
  */
 newBtn.addEventListener('click', () => {
-  grid.resetData([]); // 그리드 초기화
   detailGrid.resetData([]); // 그리드 초기화
   codeDataForm.reset(); // 코드 정보 form 초기화
   codeDataForm.codeId.removeAttribute('readonly'); // 코드 정보 form의 readonly 삭제
 
-  initializeEzenSelect({ codeGroup: 'MES', useYn: '1' }); // custom select 초기화
+  initializeEzenSelect({ codeGroup: 'MES', isEnabled: '1' }); // custom select 초기화
   initializeTextLimit(codeDataForm.codeDesc); // 텍스트 제한 element 초기화
 });

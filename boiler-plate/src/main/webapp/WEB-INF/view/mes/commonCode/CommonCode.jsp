@@ -48,8 +48,8 @@
           <div class="col-9 d-flex align-items-center justify-content-end">
             <div class="d-flex align-items-center">
               <label for="">코드명</label>
-              <input class="form-control ezen-input-text w-150" type="text" />
-              <button class="btn btn-outline-primary ezen-btn w-80">검색</button>
+              <input id="searchCodeNmKeyword" class="form-control ezen-input-text w-150" type="text" />
+              <button id="searchCodeNmBtn" class="btn btn-outline-primary ezen-btn w-80">검색</button>
             </div>
           </div>
           <!-- form control input -->
@@ -118,19 +118,39 @@
               <tbody>
                 <tr>
                   <th scope="row"><label for="codeId">코드 ID</label></th>
-                  <td><input type="text" id="codeId" name="codeId" class="form-control ezen-input-text w-150" data-vaildate-for="saveBtn" /></td>
+                  <td
+                    ><input
+                      type="text"
+                      id="codeId"
+                      name="codeId"
+                      class="form-control ezen-input-text w-150"
+                      data-vaildate-for="saveBtn"
+                  /></td>
                 </tr>
 
                 <tr>
                   <th scope="row"><label for="codeNm">코드명</label></th>
-                  <td><input type="text" id="codeNm" name="codeNm" class="form-control ezen-input-text w-250" data-vaildate-for="saveBtn" /></td>
+                  <td
+                    ><input
+                      type="text"
+                      id="codeNm"
+                      name="codeNm"
+                      class="form-control ezen-input-text w-250"
+                      data-vaildate-for="saveBtn"
+                  /></td>
                 </tr>
 
                 <tr>
                   <th scope="row"><label for="codeDesc">코드설명</label></th>
                   <td>
                     <div class="form-floating">
-                      <textarea class="form-control ezen-input-text" id="codeDesc" name="codeDesc" rows="2" style="resize: none"></textarea>
+                      <textarea
+                        class="form-control ezen-input-text"
+                        id="codeDesc"
+                        name="codeDesc"
+                        rows="2"
+                        style="resize: none"
+                      ></textarea>
                     </div>
                   </td>
                 </tr>

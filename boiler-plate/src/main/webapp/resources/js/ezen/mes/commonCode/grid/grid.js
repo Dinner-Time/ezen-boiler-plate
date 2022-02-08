@@ -5,6 +5,8 @@
  */
 'use strict'; // 엄격 모드 실행
 
+import UtilGrid from '../../../util/extened-grid.js';
+
 // 그리드 칼럼 정의
 const listColumn = [
   { header: '코드ID', name: 'codeId', width: 200, align: 'center', sortable: true },
@@ -20,14 +22,14 @@ const detailColumn = [
 ];
 
 // 그리드 생성
-const grid = new tui.Grid({
+const grid = new UtilGrid({
   el: document.querySelector('#grid'),
   columns: listColumn,
   data: [],
   bodyHeight: 580,
   rowHeight: 30,
 });
-const detailGrid = new tui.Grid({
+const detailGrid = new UtilGrid({
   el: document.querySelector('#detailGrid'),
   columns: detailColumn,
   data: [],

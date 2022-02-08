@@ -14,6 +14,7 @@ import Cookie from '../util/cookie.js';
 // 날짜 util
 import { getDate } from '../util/date.js';
 
+import { keyUpEnterHandler } from '../util/event-handlers.js';
 /**
  * 로그인 실패 시 처리
  */
@@ -38,8 +39,8 @@ if (Cookie.getCookie(`ezen_saveId`)) {
  */
 loginBtn.addEventListener('click', loginClickHandler);
 // 아이디, 비밀번호 입력 칸에서 enter키 입력시 로그인 실행
-userId.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
-password.addEventListener('keyup', (e) => inputEnterHandler(e, loginBtn));
+userId.addEventListener('keyup', (e) => keyUpEnterHandler(e, loginBtn));
+password.addEventListener('keyup', (e) => keyUpEnterHandler(e, loginBtn));
 
 // ============================== function 정의 ==============================
 /**
@@ -55,16 +56,6 @@ function loginClickHandler({ target }) {
   saveId(form);
   // 로그인 요청 수행
   sendRequest(form);
-}
-
-/**
- * @description 아이디, 패스워드 input에서 enter키 입력시 함수
- * @param {Event} 이벤트 변수의 target
- * @param {HTMLButtonElement} 로그인 버튼
- */
-function inputEnterHandler({ key }, button) {
-  if (key !== 'Enter') return;
-  button.click();
 }
 
 /**

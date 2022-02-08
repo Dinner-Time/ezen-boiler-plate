@@ -112,7 +112,7 @@ function bindDynamicUrl() {
  */
 async function setGridData(targetGrid, url) {
   const data = await getFetch(url);
-  targetGrid.resetData(data);
+  targetGrid.saveData(data);
 }
 
 export { loadCodeListByGroup, loadChildrenCodes, loadCodeData };
