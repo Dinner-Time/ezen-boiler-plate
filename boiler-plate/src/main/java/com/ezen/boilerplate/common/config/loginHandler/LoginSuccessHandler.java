@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,14 +36,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
       HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
 
+    // 세션 객체 생성
+    HttpSession session = request.getSession();
+
     // 로그인 정보 조회
     UserDetails user = (UserDetails) authentication.getPrincipal();
-
     // 로그인 정보 세션 저장
-    request.getSession().setAttribute("user", user);
+    session.setAttribute("user", user);
 
-    // 메인 페이지로 redirect
-    response.sendRedirect("/");
+    // redirect
+    response.sendRedirect("/login/success");
   }
 
 }

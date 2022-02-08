@@ -1,7 +1,8 @@
 package com.ezen.boilerplate.common.menu.domain;
 
+import com.ezen.boilerplate.common.domain.BaseTimeEntity;
+import com.ezen.boilerplate.common.menu.service.DTO.request.SaveMenuDTO;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,10 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.ezen.boilerplate.common.domain.BaseTimeEntity;
-import com.ezen.boilerplate.common.menu.service.DTO.request.SaveMenuDTO;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 메뉴 Entity
- * 
+ *
  * @author 박태훈
  * @since 2022-02-07
  * @version 1.0
@@ -39,7 +36,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "MENU_INFO" // 테이블 이름
+@Table(
+  name = "MENU_INFO" // 테이블 이름
 )
 public class Menu extends BaseTimeEntity {
 
@@ -73,8 +71,7 @@ public class Menu extends BaseTimeEntity {
 
   /**
    * 메뉴 정보 insert, update시 사용하는 생성자
-   * => DTO와 Entity의 사용법은 MenuSaveTest.java참고
-   * 
+   *
    * @param dto
    */
   public Menu(SaveMenuDTO dto) {

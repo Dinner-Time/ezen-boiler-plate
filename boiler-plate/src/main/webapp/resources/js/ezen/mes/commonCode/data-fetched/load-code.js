@@ -22,7 +22,7 @@ function loadCodeData(form, row) {
    */
   const { codeId, codeIdNm, codeDesc, useYn } = form;
 
-  [codeId, codeIdNm, codeDesc, useYn].forEach((elem) => {
+  [codeId, codeNm, codeDesc, isEnabled].forEach((elem) => {
     const { name } = elem;
 
     switch (name) {
@@ -83,7 +83,7 @@ async function setOptionsForSelect(data) {
   data.forEach((result) => {
     const option = document.createElement('option');
     option.value = result.codeId;
-    option.innerHTML = result.codeIdNm;
+    option.innerHTML = result.codeNm;
     ezenSelect.appendChild(option);
   });
 }

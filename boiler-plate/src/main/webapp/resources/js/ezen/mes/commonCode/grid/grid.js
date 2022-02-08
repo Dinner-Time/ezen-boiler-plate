@@ -8,16 +8,15 @@
 // 그리드 칼럼 정의
 const listColumn = [
   { header: '코드ID', name: 'codeId', width: 200, align: 'center', sortable: true },
-  { header: '코드명', name: 'codeIdNm', align: 'center', sortable: true },
+  { header: '코드명', name: 'codeNm', align: 'center', sortable: true },
   { header: '코드설명', name: 'codeDesc', hidden: true },
-  { header: '사용여부', name: 'useYn', hidden: true },
+  { header: '사용여부', name: 'isEnabled', hidden: true },
 ];
 const detailColumn = [
-  { header: 'No', name: 'codeNo', width: 50, align: 'center' },
   { header: '코드ID', name: 'codeId', width: 200, align: 'center', sortable: true },
-  { header: '코드명', name: 'codeIdNm', align: 'center', sortable: true },
-  { header: '코드설명', name: 'codeIdDc' },
-  { header: '사용여부', name: 'useAt' },
+  { header: '코드명', name: 'codeNm', align: 'center', sortable: true },
+  { header: '코드설명', name: 'codeDesc' },
+  { header: '사용여부', name: 'isEnabled' },
 ];
 
 // 그리드 생성

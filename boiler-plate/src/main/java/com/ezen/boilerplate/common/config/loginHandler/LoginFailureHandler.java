@@ -55,9 +55,12 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     String errorName = EzenErrorType.LOGIN_ERROR.toString();
     // session에 담을 에러 메세지
     String errorMessage = messageHandledBySpring == null
-        ? EzenError.USER_NOT_FOUND.getMessage() // 존재하지 않는 ID를 입력한 경우(message == null)
-        : EzenError.WRONG_PASSWORD.getMessage(); // 비밀번호를 잘못 입력한 경우(message != null)
+        // 존재하지 않는 ID를 입력한 경우(message == null)
+        ? EzenError.USER_NOT_FOUND.getMessage()
+        // 비밀번호를 잘못 입력한 경우(message != null)
+        : EzenError.WRONG_PASSWORD.getMessage();
 
+    // 세션에 정보 저장
     session.setAttribute(errorName, errorMessage);
 
     // redirect

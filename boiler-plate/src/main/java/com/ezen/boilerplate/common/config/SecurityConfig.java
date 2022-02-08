@@ -1,11 +1,8 @@
 package com.ezen.boilerplate.common.config;
 
-import javax.sql.DataSource;
-
 import com.ezen.boilerplate.common.config.loginHandler.LoginFailureHandler;
 import com.ezen.boilerplate.common.config.loginHandler.LoginSuccessHandler;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,9 +34,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  DataSource dataSource;
-
   // 비밀번호 암호화 설정
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
@@ -58,9 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf()
         .disable() // csrf 미적용
         .authorizeRequests() // 접근 권한 설정
-        .antMatchers("/login/**").permitAll() // 로그인 페이지는 모두 접속 가능하도록
-        .antMatchers("/error").permitAll() // 에러 페이지
-        .antMatchers("/**").authenticated()
+        .antMatchers("/login/**").permitAll() // 로그인 페이지 모두 접속 가능
+        .antMatchers("/error").permitAll() // 에러 페이지 모두 접속 가능
+        .antMatchers("/**").authenticated() // 이 외의 페이지 허용된 사용자만 접속 가능
         //
         .and()
         .formLogin() // form로그인 기반으로 인증
@@ -68,8 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .usernameParameter("userId") // username parameter custom
         .passwordParameter("password") // password parameter custom
         .loginProcessingUrl("/login/process") // login을 실행할 URL
-        .successHandler(new LoginSuccessHandler())
-        .failureHandler(new LoginFailureHandler())
+        .successHandler(new LoginSuccessHandler()) // login 성공시 실행
+        .failureHandler(new LoginFailureHandler()) // login 실패시 실행
         //
         .and()
         .logout() // 로그아웃

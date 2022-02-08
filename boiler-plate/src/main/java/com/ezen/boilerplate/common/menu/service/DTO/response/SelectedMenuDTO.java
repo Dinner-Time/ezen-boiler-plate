@@ -1,13 +1,12 @@
 package com.ezen.boilerplate.common.menu.service.DTO.response;
 
 import com.ezen.boilerplate.common.menu.domain.Menu;
-
 import lombok.Getter;
 import lombok.ToString;
 
 /**
  * 선택한 메뉴 조회 객체
- * 
+ *
  * @author 박태훈
  * @since 2022-02-07
  * @version 1.0
@@ -25,13 +24,15 @@ import lombok.ToString;
 @Getter
 @ToString
 public class SelectedMenuDTO {
-    // 상위 메뉴
-    private String parentMenu;
-    // 하위 메뉴
-    private String childMenu;
 
-    public SelectedMenuDTO(Menu entity) {
-        this.parentMenu = entity.getParentMenu().getMenuNm();
-        this.childMenu = entity.getMenuNm();
-    }
+  // 상위 메뉴
+  private String parentMenu;
+  // 하위 메뉴
+  private String childMenu;
+
+  // 생성자
+  public SelectedMenuDTO(Menu entity) {
+    this.parentMenu = entity.getParentMenu().getMenuNm();
+    this.childMenu = entity.getMenuNm();
+  }
 }

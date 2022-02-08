@@ -122,8 +122,8 @@
                 </tr>
 
                 <tr>
-                  <th scope="row"><label for="codeIdNm">코드명</label></th>
-                  <td><input type="text" id="codeIdNm" name="codeIdNm" class="form-control ezen-input-text w-250" data-vaildate-for="saveBtn" /></td>
+                  <th scope="row"><label for="codeNm">코드명</label></th>
+                  <td><input type="text" id="codeNm" name="codeNm" class="form-control ezen-input-text w-250" data-vaildate-for="saveBtn" /></td>
                 </tr>
 
                 <tr>
@@ -137,10 +137,10 @@
 
                 <tr>
                   <th scope="row">
-                    <label for="useYn">사용여부</label>
+                    <label for="isEnabled">사용여부</label>
                   </th>
                   <td>
-                    <ezen-select name="useYn" id="useYn">
+                    <ezen-select name="isEnabled" id="isEnabled">
                       <option value="1">사용</option>
                       <option value="0">미사용</option>
                     </ezen-select>
