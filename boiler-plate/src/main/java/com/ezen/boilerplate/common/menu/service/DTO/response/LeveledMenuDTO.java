@@ -1,4 +1,4 @@
-package com.ezen.boilerplate.common.menu.service.response.DTO;
+package com.ezen.boilerplate.common.menu.service.DTO.response;
 
 import com.ezen.boilerplate.common.menu.domain.Menu;
 

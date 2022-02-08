@@ -7,9 +7,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.ezen.boilerplate.common.menu.service.response.MenuResponseService;
-import com.ezen.boilerplate.common.menu.service.response.DTO.LeveledMenuDTO;
-import com.ezen.boilerplate.common.menu.service.response.DTO.SelectedMenuDTO;
+import com.ezen.boilerplate.common.menu.service.MenuResponseService;
+import com.ezen.boilerplate.common.menu.service.DTO.response.LeveledMenuDTO;
+import com.ezen.boilerplate.common.menu.service.DTO.response.SelectedMenuDTO;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.ezen.boilerplate.common.menu.domain.Menu;
 import com.ezen.boilerplate.common.menu.domain.MenuRepository;
-import com.ezen.boilerplate.common.menu.service.request.DTO.SaveMenuDTO;
+import com.ezen.boilerplate.common.menu.service.DTO.request.SaveMenuDTO;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

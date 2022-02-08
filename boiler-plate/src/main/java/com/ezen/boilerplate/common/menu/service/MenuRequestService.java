@@ -1,4 +1,4 @@
-package com.ezen.boilerplate.common.menu.service.request;
+package com.ezen.boilerplate.common.menu.service;
 
 public class MenuRequestService {
 

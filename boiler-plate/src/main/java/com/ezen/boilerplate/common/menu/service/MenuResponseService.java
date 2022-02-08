@@ -1,4 +1,4 @@
-package com.ezen.boilerplate.common.menu.service.response;
+package com.ezen.boilerplate.common.menu.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.ezen.boilerplate.common.menu.domain.Menu;
 import com.ezen.boilerplate.common.menu.domain.MenuRepository;
-import com.ezen.boilerplate.common.menu.service.response.DTO.LeveledMenuDTO;
-import com.ezen.boilerplate.common.menu.service.response.DTO.SelectedMenuDTO;
+import com.ezen.boilerplate.common.menu.service.DTO.response.LeveledMenuDTO;
+import com.ezen.boilerplate.common.menu.service.DTO.response.SelectedMenuDTO;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

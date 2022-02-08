@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ezen.boilerplate.common.domain.BaseTimeEntity;
-import com.ezen.boilerplate.common.menu.service.request.DTO.SaveMenuDTO;
+import com.ezen.boilerplate.common.menu.service.DTO.request.SaveMenuDTO;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.ezen.boilerplate.common.user;
+package com.ezen.boilerplate.common.user.web;
 
 import javax.servlet.http.HttpSession;
 
