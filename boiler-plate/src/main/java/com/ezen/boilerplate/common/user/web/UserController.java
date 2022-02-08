@@ -1,4 +1,4 @@
-package com.ezen.boilerplate.mes.user.web;
+package com.ezen.boilerplate.common.user;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +25,6 @@ public class UserController {
       model.addAttribute(ERROR_PARAMETER, message); // model에 메세지를 담아 보내고
       session.removeAttribute(EzenErrorType.LOGIN_ERROR.toString()); // session에서 메세지를 삭제
     }
-    return "mes/login/login";
+    return "user/login";
   }
 }

@@ -1,27 +1,25 @@
-package com.ezen.boilerplate.mes.user.service.DTO;
+package com.ezen.boilerplate.common.user.service.DTO.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.ezen.boilerplate.mes.user.domain.User;
+import com.ezen.boilerplate.common.user.domain.User;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
-public class LoginDTO implements UserDetails{
+public class LoginDTO implements UserDetails {
 
   private String userId;
   private String password;
 
-  @Builder
-  public LoginDTO(User entity){
+  public LoginDTO(User entity) {
     this.userId = entity.getUserId();
     this.password = entity.getPassword();
   }
@@ -41,7 +39,7 @@ public class LoginDTO implements UserDetails{
   // 권한 목록
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    Collection <GrantedAuthority> authorities = new ArrayList<>();
+    Collection<GrantedAuthority> authorities = new ArrayList<>();
 
     // 유저 별 추가할 권한 관리
     authorities.add(new SimpleGrantedAuthority("Role"));
@@ -71,5 +69,5 @@ public class LoginDTO implements UserDetails{
   public boolean isEnabled() {
     return true;
   }
-  
+
 }

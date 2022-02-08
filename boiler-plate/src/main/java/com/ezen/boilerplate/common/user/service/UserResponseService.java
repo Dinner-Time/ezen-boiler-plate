@@ -1,8 +1,8 @@
-package com.ezen.boilerplate.mes.user.service;
+package com.ezen.boilerplate.common.user.service;
 
-import com.ezen.boilerplate.mes.user.domain.User;
-import com.ezen.boilerplate.mes.user.domain.UserRepository;
-import com.ezen.boilerplate.mes.user.service.DTO.LoginDTO;
+import com.ezen.boilerplate.common.user.domain.User;
+import com.ezen.boilerplate.common.user.domain.UserRepository;
+import com.ezen.boilerplate.common.user.service.DTO.LoginDTO;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

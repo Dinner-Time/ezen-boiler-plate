@@ -2,16 +2,16 @@ package com.ezen.boilerplate;
 
 import java.util.Optional;
 
-import com.ezen.boilerplate.mes.menu.domain.Menu;
-import com.ezen.boilerplate.mes.menu.domain.MenuRepository;
-import com.ezen.boilerplate.mes.menu.service.DTO.SaveMenuDTO;
+import com.ezen.boilerplate.common.menu.domain.Menu;
+import com.ezen.boilerplate.common.menu.domain.MenuRepository;
+import com.ezen.boilerplate.common.menu.service.request.DTO.SaveMenuDTO;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class MenuInsertTest {
+public class MenuSaveTest {
 
     @Autowired
     MenuRepository menuRepository;
@@ -21,8 +21,8 @@ public class MenuInsertTest {
         Optional<Menu> parentMenu = menuRepository.findById("110");
 
         SaveMenuDTO dto = SaveMenuDTO.builder()
-                .menuNo("106")
-                .menuNm("test6")
+                .menuNo("105")
+                .menuNm("다시수정test5")
                 .menuOrder(1)
                 .redirectUrl("mes/common")
                 .parentMenu(parentMenu.isPresent() ? parentMenu.get() : null)

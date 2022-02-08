@@ -1,4 +1,4 @@
-package com.ezen.boilerplate.mes.menu.domain;
+package com.ezen.boilerplate.common.menu.domain;
 
 import java.util.List;
 
@@ -11,14 +11,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ezen.boilerplate.common.domain.BaseTimeEntity;
-import com.ezen.boilerplate.mes.menu.service.DTO.SaveMenuDTO;
+import com.ezen.boilerplate.common.menu.service.request.DTO.SaveMenuDTO;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 메뉴 Entity
+ * 
+ * @author 박태훈
+ * @since 2022-02-07
+ * @version 1.0
+ * @see
+ *
+ *      <pre>
+ * << 개정이력(Modification Information) >>
+ *
+ *   수정일		   수정자	    수정내용
+ *  -------     --------  ---------------------------
+ *  2022-02-07  박태훈      최초 생성
+ *
+ *      </pre>
+ */
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -55,7 +71,12 @@ public class Menu extends BaseTimeEntity {
   @OneToMany(mappedBy = "parentMenu")
   private List<Menu> childMenu; // 자기 자신 entity타입을 담는 collection 변수를 생성한다.
 
-  @Builder
+  /**
+   * 메뉴 정보 insert, update시 사용하는 생성자
+   * => DTO와 Entity의 사용법은 MenuSaveTest.java참고
+   * 
+   * @param dto
+   */
   public Menu(SaveMenuDTO dto) {
     this.menuNo = dto.getMenuNo();
     this.menuNm = dto.getMenuNm();

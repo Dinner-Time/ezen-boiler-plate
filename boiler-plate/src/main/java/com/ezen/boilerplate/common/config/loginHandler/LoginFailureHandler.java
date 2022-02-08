@@ -27,6 +27,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
  *   수정일		   수정자	    수정내용
  *  -------     --------  ---------------------------
  *  2022-02-07  박태훈      최초 생성
+ *  2022-02-08  박태훈      에러 메세지 처리 (if => 삼항 연산자)
  *
  *      </pre>
  */
@@ -47,19 +48,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
     // 이동할 url
     String redirectUrl = "/login";
-    // 에러 메세지
-    String message = exception.getMessage();
+    // spring에서 처리한 에러 메세지
+    String messageHandledBySpring = exception.getMessage();
 
-    // 존재하지 않는 ID를 입력한 경우(message == null)
-    if (message == null) {
-      // flashAttribute
-      session.setAttribute(EzenErrorType.LOGIN_ERROR.toString(), EzenError.USER_NOT_FOUND.getMessage());
+    // attribute name
+    String errorName = EzenErrorType.LOGIN_ERROR.toString();
+    // session에 담을 에러 메세지
+    String errorMessage = messageHandledBySpring == null
+        ? EzenError.USER_NOT_FOUND.getMessage() // 존재하지 않는 ID를 입력한 경우(message == null)
+        : EzenError.WRONG_PASSWORD.getMessage(); // 비밀번호를 잘못 입력한 경우(message != null)
 
-      // 비밀번호를 잘못 입력한 경우(message != null)
-    } else {
-      // flashAttribute
-      session.setAttribute(EzenErrorType.LOGIN_ERROR.toString(), EzenError.WRONG_PASSWORD.getMessage());
-    }
+    session.setAttribute(errorName, errorMessage);
 
     // redirect
     response.sendRedirect(redirectUrl);
