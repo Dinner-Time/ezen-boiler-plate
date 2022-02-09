@@ -16,9 +16,11 @@ public class CommonCodeSaveTest {
     @Test
     public void test() {
         SaveCodeDTO dto = new SaveCodeDTO();
-        dto.setCodeId("01");
-        dto.setCodeNm("합판");
-        dto.setParentCode("MES002");
-        codeRequest.saveDetail(dto);
+        for (int i = 10; i < 30; i++) {
+            dto.setCodeId("MES0" + i);
+            dto.setCodeNm("test" + i);
+            dto.setParentCode("MES");
+            codeRequest.saveMaster(dto);
+        }
     }
 }

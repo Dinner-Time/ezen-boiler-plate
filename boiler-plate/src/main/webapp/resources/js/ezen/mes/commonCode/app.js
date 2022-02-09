@@ -3,22 +3,20 @@
  * @author 박태훈
  * @since 2022-02-04
  */
-
-// TODO: 저장 기능 구현 필요
 'use strict'; // 엄격 모드 실행
 
 // 유효성 검사
-import { setValidationStyle, vaildateRequestData, checkLimitText } from '../../util/vaildation.js';
+import { setValidationStyle, checkLimitText } from '../../util/vaildation.js';
 // 초기화 function
 import { initializeEzenSelect, initializeTextLimit } from '../../util/initializations.js';
-
+// 엔터키 구현
 import { keyUpEnterHandler } from '../../util/event-handlers.js';
 
-import { formToJson } from '../../util/form-util.js';
 // 그리드
 import { grid, detailGrid } from './grid/grid.js';
 // API 호출
 import { loadCodeListByGroup, loadChildrenCodes, loadCodeData } from './data-fetched/load-code.js';
+import { saveChildrenCode, saveMasterCodeInfo } from './data-fetched/save-code.js';
 
 /**
  * DOM 선택
@@ -66,39 +64,8 @@ grid.on('click', (e) => {
 saveBtn.addEventListener('click', (e) => {
   // 현재 탭에 따라 서로 다른 function 호출
   const currentTabId = document.querySelector('.tab-pane.show.active').id;
-  currentTabId === 'detail-code' ? saveChildrenCode(e) : saveCodeInfo(e);
+  currentTabId === 'detail-code' ? saveChildrenCode(e, codeDataForm) : saveMasterCodeInfo(e, codeDataForm);
 });
-
-// 하위 코드 목록 저장
-function saveChildrenCode(e) {
-  console.log('하위 코드 목록');
-}
-
-// 코드 정보 저장
-function saveCodeInfo(e) {
-  const { target } = e;
-  if (!vaildateRequestData(target.id)) return; // 유효성 검사 이후 저장 실행
-  const moreRequest = {
-    parentCode: document.querySelector('#codeGroup').value,
-  };
-
-  const requestData = { ...formToJson(codeDataForm), ...moreRequest };
-
-  fetch('/mes/commonCode/save/master', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(requestData),
-  })
-    .then((data) => data.json())
-    .then((data) => {
-      if (data === 1) {
-        window.location.reload();
-      }
-    })
-    .catch((err) => console.log(err));
-}
 
 /**
  * 초기화 기능 구현
