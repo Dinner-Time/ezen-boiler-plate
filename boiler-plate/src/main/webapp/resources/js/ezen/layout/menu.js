@@ -5,8 +5,18 @@
  */
 
 // 로고 이미지 클릭시 홈 화면으로
-document.querySelector('.ezen-menu-wrap .offcanvas-title').addEventListener('click', () => {
+document.querySelector('.ezen-menu-wrapper .offcanvas-title').addEventListener('click', () => {
   leavePageTrace('/');
+});
+
+const menuWraps = document.querySelectorAll('.menu-wrap');
+
+[...menuWraps].forEach((menu) => {
+  menu.addEventListener('click', () => {
+    const show = document.querySelector('.collapse.show');
+    if (!show) return;
+    show.previousElementSibling.firstElementChild.click();
+  });
 });
 
 // 페이지 이동 link

@@ -2,8 +2,8 @@ package com.ezen.boilerplate.mes;
 
 import javax.servlet.http.HttpSession;
 
-import com.ezen.boilerplate.common.menu.service.MenuResponseService;
-import com.ezen.boilerplate.common.menu.service.DTO.response.SelectedMenuDTO;
+import com.ezen.boilerplate.mes.manage.menu.service.MenuResponseService;
+import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.SelectedMenuDTO;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

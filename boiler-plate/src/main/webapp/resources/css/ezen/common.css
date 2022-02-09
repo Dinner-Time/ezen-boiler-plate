@@ -95,7 +95,7 @@ menu-navigation .menu-navigation .menu-navigation-home::before {
   background-color: transparent;
 }
 .ezen-search-condition-wrap label {
-  margin-right: 2em;
+  margin-right: 1em;
 }
 
 /* ezen-content-wrap */
@@ -115,6 +115,24 @@ menu-navigation .menu-navigation .menu-navigation-home::before {
   background-color: #fff;
   font-weight: bolder;
   margin-left: 1em;
+}
+
+.ezen-btn-search {
+  width: 25px;
+  height: 25px;
+  margin: 0 0.5em;
+  border-radius: 0.25em;
+  border: 0;
+  background-color: #424242;
+  background-image: url('/resources/images/icon/ico_search_white.png');
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.ezen-btn-search:hover {
+  box-shadow: #495057 0 0 0 0.05rem;
+  opacity: 0.8;
+  transition: all 0.15s ease-in;
 }
 .ezen-btn:hover {
   background-color: var(--primary-color);

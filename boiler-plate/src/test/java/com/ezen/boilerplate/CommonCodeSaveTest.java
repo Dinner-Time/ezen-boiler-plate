@@ -1,7 +1,7 @@
 package com.ezen.boilerplate;
 
-import com.ezen.boilerplate.mes.stdrMng.commonCode.service.CommonCodeRequest;
-import com.ezen.boilerplate.mes.stdrMng.commonCode.service.DTO.request.SaveCodeDTO;
+import com.ezen.boilerplate.mes.standard.commonCode.service.CommonCodeRequest;
+import com.ezen.boilerplate.mes.standard.commonCode.service.DTO.request.SaveCodeDTO;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

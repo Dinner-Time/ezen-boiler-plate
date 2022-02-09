@@ -1,6 +1,6 @@
 package com.ezen.boilerplate;
 
-import com.ezen.boilerplate.common.menu.domain.MenuRepository;
+import com.ezen.boilerplate.mes.manage.menu.domain.MenuRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
