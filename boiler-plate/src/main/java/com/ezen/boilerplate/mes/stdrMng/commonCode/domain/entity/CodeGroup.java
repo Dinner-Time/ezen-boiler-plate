@@ -13,9 +13,26 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * CodeGroup Entity
+ * 
+ * @author 박태훈
+ * @since 2022-02-08
+ * @version 1.0
+ * @see
+ *
+ *      <pre>
+ * << 개정이력(Modification Information) >>
+ *
+ *   수정일		   수정자	    수정내용
+ *  -------     --------  ---------------------------
+ *  2022-02-08  박태훈      최초 생성
+ *
+ *      </pre>
+ */
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 @Getter
 @Entity
 @Table(name = "COMMON_CODE_CATEGORY" // 테이블 이름

@@ -1,8 +1,9 @@
 package com.ezen.boilerplate.common.menu.service.DTO.response;
 
 import com.ezen.boilerplate.common.menu.domain.Menu;
+
 import lombok.Getter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  * 접근 가능한 메뉴 정보 조회 객체
@@ -22,23 +23,23 @@ import lombok.ToString;
  *      </pre>
  */
 @Getter
-@ToString
+@NoArgsConstructor
 public class LeveledMenuDTO {
 
-  // 메뉴번호
-  private String menuNo;
-  // 메뉴이름
-  private String menuNm;
-  // 상위메뉴
-  private Menu parentMenu;
-  // 이동할 url
-  private String redirectUrl;
+    // 메뉴번호
+    private String menuNo;
+    // 메뉴이름
+    private String menuNm;
+    // 상위메뉴
+    private Menu parentMenu;
+    // 이동할 url
+    private String redirectUrl;
 
-  // 생성자
-  public LeveledMenuDTO(Menu entity) {
-    this.menuNo = entity.getMenuNo();
-    this.menuNm = entity.getMenuNm();
-    this.parentMenu = entity.getParentMenu();
-    this.redirectUrl = entity.getRedirectUrl();
-  }
+    // 생성자
+    public LeveledMenuDTO(Menu entity) {
+        this.menuNo = entity.getMenuNo();
+        this.menuNm = entity.getMenuNm();
+        this.parentMenu = entity.getParentMenu();
+        this.redirectUrl = entity.getRedirectUrl();
+    }
 }

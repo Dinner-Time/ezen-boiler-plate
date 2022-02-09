@@ -17,6 +17,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Code 저장, 수정, 삭제 service
+ * 
+ * @author 박태훈
+ * @since 2022-02-08
+ * @version 1.0
+ * @see
+ *
+ *      <pre>
+ * << 개정이력(Modification Information) >>
+ *
+ *   수정일		   수정자	    수정내용
+ *  -------     --------  ---------------------------
+ *  2022-02-08  박태훈      최초 생성
+ *
+ *      </pre>
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,7 +43,14 @@ public class CommonCodeRequest {
     private final MasterCodeRepository masterCodeRepository;
     private final DetailCodeRepository detailCodeRepository;
 
-    public String saveCategory(SaveCodeDTO dto) {
+    private final int SUCCESS = 1;
+    private final int FAIL = 0;
+
+    /**
+     * CodeGroup 저장
+     */
+    public int saveCodeGroup(SaveCodeDTO dto) {
+
         CodeGroup category = CodeGroup.builder() //
                 .codeId(dto.getCodeId()) //
                 .codeNm(dto.getCodeNm()) //
@@ -35,17 +59,17 @@ public class CommonCodeRequest {
                 .build();
         codeCategoryRepository.save(category);
 
-        return category.getCodeId();
+        return SUCCESS;
     }
 
     /**
      * 
      */
-    public String saveMaster(SaveCodeDTO dto) {
+    public int saveMaster(SaveCodeDTO dto) {
         Optional<CodeGroup> category = codeCategoryRepository.findById(dto.getParentCode());
 
         if (!category.isPresent()) {
-            return null;
+            return FAIL;
         }
 
         MasterCode masterCode = MasterCode.builder() //
@@ -57,20 +81,19 @@ public class CommonCodeRequest {
                 .build();
         masterCodeRepository.save(masterCode);
 
-        return masterCode.getCodeId();
+        return SUCCESS;
     }
 
     /**
      * 
      */
-    public String saveDetail(List<SaveCodeDTO> dtoList) {
+    public int saveDetail(List<SaveCodeDTO> dtoList) {
 
         for (SaveCodeDTO dto : dtoList) {
-            System.out.println(dto.getParentCode());
             Optional<MasterCode> masterCode = masterCodeRepository.findById(dto.getParentCode());
 
             if (!masterCode.isPresent()) {
-                return null;
+                return FAIL;
             }
 
             DetailCode detailCode = DetailCode.builder() //
@@ -83,6 +106,6 @@ public class CommonCodeRequest {
             detailCodeRepository.save(detailCode);
         }
 
-        return "success";
+        return SUCCESS;
     }
 }

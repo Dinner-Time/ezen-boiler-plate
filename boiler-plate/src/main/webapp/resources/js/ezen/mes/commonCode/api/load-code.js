@@ -7,7 +7,8 @@
 
 import { getFetch } from '../../../util/defined-fetches.js';
 import { EzenSelect } from '../../../util/web-components.js';
-import { CommonCodeUrl } from '../../../util/request-urls.js';
+
+import URL from './url.js';
 
 /**
  *
@@ -16,7 +17,7 @@ import { CommonCodeUrl } from '../../../util/request-urls.js';
  * @param {*} grid
  */
 async function loadGroupCodeList(grid) {
-  const data = await getFetch(CommonCodeUrl.CODE_GROUP); // fetch로 API요청
+  const data = await getFetch(URL.CODE_GROUP_LIST); // fetch로 API요청
 
   /**
    * select web-component 적용 시
@@ -35,7 +36,7 @@ async function loadGroupCodeList(grid) {
 // 코드 목록 load
 async function loadMasterCodeList(grid) {
   // API를 요청할 때 parameter로 넘어가는 값이 동적일 수 있도록 url을 함수로 정의한다.
-  const url = `${CommonCodeUrl.COMMON_CODE}?codeGroup=${document.querySelector('#codeGroup').value}`;
+  const url = `${URL.MASTER_CODE_LIST}?codeGroup=${document.querySelector('#codeGroup').value}`;
   await setGridData(grid, url);
 
   // 미 사용 row에 backgourd 부여
@@ -52,7 +53,7 @@ async function loadMasterCodeList(grid) {
  */
 async function loadChildrenCodeList(targetGrid, parentRow) {
   const { codeId } = parentRow;
-  await setGridData(targetGrid, `${CommonCodeUrl.CHILD_CODE}?codeId=${codeId}`);
+  await setGridData(targetGrid, `${URL.DETAIL_CODE_LIST}?codeId=${codeId}`);
 
   targetGrid.getData().forEach(({ rowKey }) => {
     targetGrid.disableCell(rowKey, 'codeId');

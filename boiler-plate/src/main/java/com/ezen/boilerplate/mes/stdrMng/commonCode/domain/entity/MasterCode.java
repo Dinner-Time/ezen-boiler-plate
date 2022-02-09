@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 공통코드 master Entity
+ * MasterCode Entity
  *
  * @author 박태훈
  * @since 2022-02-08
@@ -35,9 +35,9 @@ import lombok.NoArgsConstructor;
  *
  *      </pre>
  */
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 @Getter
 @Entity
 @Table(name = "COMMON_CODE_MASTER" // 테이블 이름

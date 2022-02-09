@@ -4,7 +4,6 @@ import com.ezen.boilerplate.common.menu.domain.Menu;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * 메뉴 정보 저장 객체
@@ -25,19 +24,18 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
 public class SaveMenuDTO {
 
-  // 메뉴 번호(pk)
-  private String menuNo;
-  // 메뉴 이름
-  private String menuNm;
-  // 메뉴 순서
-  private int menuOrder;
-  // 메뉴 설명
-  private String menuDesc;
-  // 연결된 페이지
-  private String redirectUrl;
-  // 상위 메뉴
-  private Menu parentMenu;
+    // 메뉴 번호(pk)
+    private String menuNo;
+    // 메뉴 이름
+    private String menuNm;
+    // 메뉴 순서
+    private int menuOrder;
+    // 메뉴 설명
+    private String menuDesc;
+    // 연결된 페이지
+    private String redirectUrl;
+    // 상위 메뉴
+    private Menu parentMenu;
 }

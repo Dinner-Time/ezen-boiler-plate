@@ -9,6 +9,7 @@ const error = {
   INVALID: '저장할 수 없는 값이 있습니다.',
   OUT_OF_TEXT_LIMIT: '입력 제한을 초과하였습니다.',
   SAVE_ERROR: '저장에 실패하였습니다.',
+  SAVE_SUCCESS: '저장에 성공하였습니다.',
 
   /**
    * 발생한 에러 log

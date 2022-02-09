@@ -5,8 +5,6 @@
  */
 // 유효성 검사
 import { vaildateRequestData } from '../util/vaildation.js';
-// URL
-import { PROCCESS_LOGIN } from '../util/request-urls.js';
 // method
 import RequestMethod from '../util/request-method.js';
 // 쿠키
@@ -79,7 +77,7 @@ function saveId({ isSaveId, userId }) {
  * @param {HTMLFormElement} form
  */
 function sendRequest(form) {
-  form.action = PROCCESS_LOGIN;
+  form.action = '/login/process';
   form.method = RequestMethod.POST;
   form.submit();
 }

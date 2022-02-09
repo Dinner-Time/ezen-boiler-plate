@@ -7,6 +7,9 @@
 import { postFetch } from '../../../util/defined-fetches.js';
 import { formToJson } from '../../../util/form-util.js';
 import { vaildateRequestData } from '../../../util/vaildation.js';
+import AlertMessage from '../../../util/error-message.js';
+
+import URL from './url.js';
 
 const newBtn = document.querySelector('#newBtn');
 
@@ -27,7 +30,7 @@ async function saveChildrenCode(grid, masterCodeId) {
     requestData.push({ ...row, ...moreRequest });
   });
 
-  const executeSave = await postFetch('/mes/commonCode/save/children', requestData);
+  const executeSave = await postFetch(URL.SAVE_DETAIL_CODE, requestData);
 
   executeSaveCallback(executeSave);
 }
@@ -48,17 +51,17 @@ async function saveMasterCodeInfo(e, form) {
   const requestData = { ...formToJson(form), ...moreRequest };
 
   // api 호출
-  const executeSave = await postFetch('/mes/commonCode/save/master', requestData);
+  const executeSave = await postFetch(URL.SAVE_MASTER_CODE, requestData);
 
   executeSaveCallback(executeSave);
 }
 
 function executeSaveCallback(executeSave) {
   if (executeSave === 1) {
-    toastr.success('저장이 완료되었습니다.');
+    toastr.success(AlertMessage.SAVE_SUCCESS);
     newBtn.click();
   } else {
-    toastr.warning('저장에 실패했습니다.');
+    toastr.warning(AlertMessage.SAVE_ERROR);
   }
 }
 

@@ -35,10 +35,10 @@ import lombok.NoArgsConstructor;
  *
  *      </pre>
  */
-@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Entity
 @Table(name = "USER_INFO", // 테이블 이름
         uniqueConstraints = { // unique 제약조건 설정
