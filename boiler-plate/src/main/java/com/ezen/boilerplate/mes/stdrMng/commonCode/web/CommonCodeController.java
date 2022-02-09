@@ -45,10 +45,21 @@ public class CommonCodeController {
     }
 
     @PostMapping("/mes/commonCode/save/master")
-    public int save(@RequestBody SaveCodeDTO dto){
+    public int save(@RequestBody SaveCodeDTO dto) {
 
         String save = commonCodeRequest.saveMaster(dto);
-        
+
+        int result;
+        result = save == null ? 0 : 1;
+
+        return result;
+    }
+
+    @PostMapping("/mes/commonCode/save/children")
+    public int save(@RequestBody List<SaveCodeDTO> dtoList) {
+
+        String save = commonCodeRequest.saveDetail(dtoList);
+
         int result;
         result = save == null ? 0 : 1;
 

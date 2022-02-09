@@ -61,15 +61,7 @@ function vaildateRequestData(vaildateFor) {
       }
     });
   } catch (error) {
-    /**
-     * 발생한 에러 log
-     *    해당 함수에서 정의된 에러는 일반 String이다.
-     *    해당 함수에서 정의하지 않은 에러는 Error객체이다.
-     *    => Error객체는 stack property를 가지므로 stack property의 존재 유무로
-     *       사용자에게 보여지는 메세지를 정의한다.
-     */
-    console.dir(error);
-    error.stack ? toastr.error(ErrorMessage.UNKNOWN) : toastr.warning(error);
+    ErrorMessage.toastrErrorMessage(error);
     return false;
   }
   return true;

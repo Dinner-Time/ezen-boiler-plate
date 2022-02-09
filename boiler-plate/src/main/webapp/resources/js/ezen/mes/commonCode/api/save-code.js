@@ -11,8 +11,25 @@ import { vaildateRequestData } from '../../../util/vaildation.js';
 const newBtn = document.querySelector('#newBtn');
 
 // 하위 코드 목록 저장
-function saveChildrenCode(e) {
-  console.log('하위 코드 목록');
+async function saveChildrenCode(grid, masterCodeId) {
+  if (!masterCodeId) {
+    toastr.warning('코드목록에서 선택한 코드가 없습니다.');
+    return;
+  }
+
+  if (!grid.vaildateColumn(['codeId', 'codeNm', 'codeDesc'])) return;
+
+  const moreRequest = { parentCode: masterCodeId };
+  const requestData = [];
+  const data = grid.getData();
+
+  data.forEach((row) => {
+    requestData.push({ ...row, ...moreRequest });
+  });
+
+  const executeSave = await postFetch('/mes/commonCode/save/children', requestData);
+
+  executeSaveCallback(executeSave);
 }
 
 // 코드 정보 저장
@@ -33,6 +50,10 @@ async function saveMasterCodeInfo(e, form) {
   // api 호출
   const executeSave = await postFetch('/mes/commonCode/save/master', requestData);
 
+  executeSaveCallback(executeSave);
+}
+
+function executeSaveCallback(executeSave) {
   if (executeSave === 1) {
     toastr.success('저장이 완료되었습니다.');
     newBtn.click();

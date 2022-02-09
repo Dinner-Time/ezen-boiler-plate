@@ -1,5 +1,6 @@
 package com.ezen.boilerplate.mes.stdrMng.commonCode.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.ezen.boilerplate.mes.stdrMng.commonCode.domain.entity.CodeGroup;
@@ -62,25 +63,26 @@ public class CommonCodeRequest {
     /**
      * 
      */
-    public String saveDetail(SaveCodeDTO dto) {
-        Optional<MasterCode> masterCode = masterCodeRepository.findById(dto.getParentCode());
+    public String saveDetail(List<SaveCodeDTO> dtoList) {
 
-        if (!masterCode.isPresent()) {
-            return null;
+        for (SaveCodeDTO dto : dtoList) {
+            System.out.println(dto.getParentCode());
+            Optional<MasterCode> masterCode = masterCodeRepository.findById(dto.getParentCode());
+
+            if (!masterCode.isPresent()) {
+                return null;
+            }
+
+            DetailCode detailCode = DetailCode.builder() //
+                    .id(new DetailCodeId(dto.getCodeId(), dto.getParentCode())) //
+                    .codeNm(dto.getCodeNm()) //
+                    .codeDesc(dto.getCodeDesc()) //
+                    .masterCode(masterCode.get()) //
+                    .isEnabled(dto.getIsEnabled()) //
+                    .build();
+            detailCodeRepository.save(detailCode);
         }
 
-        DetailCodeId id = new DetailCodeId();
-        id.setCodeId(dto.getCodeId());
-
-        DetailCode detailCode = DetailCode.builder() //
-                .id(id) //
-                .codeNm(dto.getCodeNm()) //
-                .codeDesc(dto.getCodeDesc()) //
-                .masterCode(masterCode.get()) //
-                .isEnabled(dto.getIsEnabled()) //
-                .build();
-        detailCodeRepository.save(detailCode);
-
-        return detailCode.getId().getCodeId();
+        return "success";
     }
 }

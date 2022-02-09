@@ -174,6 +174,11 @@ label.ezen-required::after {
   margin-left: 0.15em;
 }
 
+.deprecated-grid-row {
+  background-color: #f7dbb1 !important;
+  text-decoration: line-through;
+}
+
 /* sizing */
 .w-250,
 .w-200,
