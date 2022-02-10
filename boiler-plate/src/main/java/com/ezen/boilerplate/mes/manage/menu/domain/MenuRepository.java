@@ -27,4 +27,7 @@ public interface MenuRepository extends JpaRepository<Menu, String> {
 
     // Menu entity의 parentMenu가 null인 행 select
     public List<Menu> findByParentMenuIsNullOrderByMenuOrder();
+
+    // 한 건 조회
+    public Menu findByMenuNo(String menuNo);
 }

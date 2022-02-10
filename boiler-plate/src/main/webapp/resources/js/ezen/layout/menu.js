@@ -13,7 +13,7 @@ const menuWraps = document.querySelectorAll('.menu-wrap');
 
 [...menuWraps].forEach((menu) => {
   menu.addEventListener('click', () => {
-    const show = document.querySelector('.collapse.show');
+    const show = document.querySelector('.offcanvas-body .collapse.show');
     if (!show) return;
     show.previousElementSibling.firstElementChild.click();
   });

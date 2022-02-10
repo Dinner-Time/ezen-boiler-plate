@@ -13,16 +13,9 @@
   <!-- row -->
   <div class="row py-1">
     <!-- col -->
-    <div class="col-6 d-flex align-items-center">
-      <label for="menuNm">메뉴 검색</label>
-      <input id="menuNm" class="form-control ezen-input-text w-150" type="text" />
-      <button type="button" id="searchBtn" class="ezen-btn-search"></button>
-    </div>
-    <!-- col -->
-
-    <!-- col -->
-    <div class="col-6 d-flex align-items-center justify-content-end">
-      <button type="button" id="searchBtn" class="btn btn-outline-primary">신규</button>
+    <div class="col-12 d-flex align-items-center justify-content-end">
+      <button type="button" id="newBtn" class="btn btn-outline-primary ezen-btn ezen-btn-new">신규</button>
+      <button type="button" id="saveBtn" class="btn btn-outline-primary ezen-btn ezen-btn-save">저장</button>
     </div>
     <!-- col -->
   </div>
@@ -30,45 +23,108 @@
 </div>
 
 <div class="ezen-content-wrap mt-3">
-  <div class="row">
-    <div class="col-2">
-      <ul class="list-group list-group-flush">
+  <div class="row" style="height: 75vh">
+    <div class="col-3" style="max-height: 100%; overflow-x: hidden; overflow-y: scroll">
+      <div class="accordion accordion-flush" id="menuManageAccordion">
         <c:forEach var="parent" items="${menuList.parent}">
-          <li class="list-group-item">
-            <button
-              class="btn form-control btn-primary mb-1"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#menu-manage-${parent.menuNo}"
-              aria-expanded="false"
-              aria-controls="menu-manage-${parent.menuNo}"
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="menu-manage-header-${parent.menuNo}">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu-manage-${parent.menuNo}"
+                aria-expanded="false"
+                aria-controls="menu-manage-${parent.menuNo}"
+              >
+                ${parent.menuNm}
+              </button>
+            </h2>
+            <div
+              id="menu-manage-${parent.menuNo}"
+              class="accordion-collapse collapse"
+              aria-labelledby="menu-manage-header-${parent.menuNo}"
+              data-bs-parent="#menuManageAccordion"
+              data-master-menu="${parent.menuNo}"
             >
-              ${parent.menuNm}
-            </button>
-          </li>
+              <div class="accordion-body px-0">
+                <div class="list-group list-group-flush" style="border-radius: 0.25rem"></div>
+              </div>
+            </div>
+          </div>
         </c:forEach>
-      </ul>
-    </div>
-    <div class="col-2">
-      <c:forEach var="parent" items="${menuList.parent}">
-        <div class="collapse collapse-horizontal" id="menu-manage-${parent.menuNo}">
-          <ul class="list-group list-group-flush" style="width: 200px">
-            <c:forEach var="child" items="${menuList.children}">
-              <c:if test="${child.parentMenu.menuNo == parent.menuNo}">
-                <li class="list-group-item">${child.menuNm}</li>
-              </c:if>
-            </c:forEach>
-          </ul>
-        </div>
-      </c:forEach>
-    </div>
-    <div class="col-8">
-      <div class="ezen-title">정보 수정</div>
-      <!-- col -->
-      <div class="col-12 d-flex align-items-center justify-content-end">
-        <button type="button" id="searchBtn" class="btn btn-outline-primary">저장</button>
       </div>
-      <!-- col -->
+    </div>
+    <div class="col-1"></div>
+    <div class="col-8">
+      <!-- tab 구현 -->
+      <nav>
+        <div class="nav nav-tabs ezen-tabs" id="nav-tab" role="tablist">
+          <button
+            class="nav-link active"
+            id="menuManageTab"
+            data-bs-toggle="tab"
+            data-bs-target="#menuManageTabBody"
+            type="button"
+            role="tab"
+            aria-controls="menuManageTabBody"
+            aria-selected="true"
+            style="flex: 0.2"
+          >
+            <span class="ezen-title">정보수정</span>
+          </button>
+          <!--  -->
+          <button class="nav-link" type="button" disabled style="border-top: none; border-right: none; background: none"></button>
+        </div>
+      </nav>
+
+      <!-- tab content -->
+      <div class="tab-content ezen-tab-content py-4 px-2" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="menuManageTabBody" role="tabpanel" aria-labelledby="menuManageTab">
+          <form id="meunManageForm" class="row" action="">
+            <div class="col-12 mb-4">
+              <div class="d-flex align-items-center">
+                <label for="masterMenu">상위 메뉴</label>
+                <input
+                  type="text"
+                  id="masterMenu"
+                  name="masterMenu"
+                  class="form-control w-150 ezen-input-text"
+                  readonly
+                  data-vaildate-for="saveMenu"
+                />
+              </div>
+            </div>
+
+            <div class="col-4 mb-4">
+              <label for="menuNo">메뉴 번호</label>
+              <input type="text" id="menuNo" name="menuNo" class="form-control ezen-input-text mt-2" readonly data-vaildate-for="saveMenu" />
+            </div>
+            <div class="col-4">
+              <label for="menuNm">메뉴 이름</label>
+              <input type="text" id="menuNm" name="menuNm" class="form-control ezen-input-text mt-2" data-vaildate-for="saveMenu" />
+            </div>
+            <div class="col-2">
+              <label for="menuOrder">메뉴 순서</label>
+              <input type="number" id="menuOrder" name="menuOrder" class="form-control ezen-input-text mt-2" data-vaildate-for="saveMenu" />
+            </div>
+            <div class="col-2 d-flex align-items-center justify-content-start">
+              <button type="button" id="deleteBtn" class="btn btn-danger" style="display: none">삭제</button>
+            </div>
+
+            <div class="col-12 mb-4">
+              <label for="redirectUrl">페이지 경로</label>
+              <input type="text" id="redirectUrl" name="redirectUrl" class="form-control ezen-input-text mt-2" data-vaildate-for="saveMenu" />
+            </div>
+            <div class="col-12">
+              <span>메뉴 설명</span>
+              <div class="form-floating">
+                <textarea class="form-control ezen-input-text mt-2" id="menuDesc" name="menuDesc" style="resize: none; height: 100px"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

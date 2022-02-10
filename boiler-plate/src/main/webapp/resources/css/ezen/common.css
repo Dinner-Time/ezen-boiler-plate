@@ -6,6 +6,34 @@
   font-size: 14px;
 }
 
+/* scroll custom */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+.offcanvas-body::-webkit-scrollbar-track {
+  background-color: #666666;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dfdfdf;
+}
+.offcanvas-body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d5d5d5;
+}
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background: #838383;
+}
+/* scroll custom */
+
 body {
   display: flex;
   flex-direction: column;
@@ -20,6 +48,9 @@ main {
   display: flex;
   justify-content: center;
   overflow: hidden;
+}
+label {
+  margin-right: 1em;
 }
 .content-wrapper {
   width: 1460px;
@@ -94,14 +125,11 @@ menu-navigation .menu-navigation .menu-navigation-home::before {
 .ezen-search-condition-wrap.no-background {
   background-color: transparent;
 }
-.ezen-search-condition-wrap label {
-  margin-right: 1em;
-}
 
 /* ezen-content-wrap */
 .ezen-content-wrap {
   width: 100%;
-  height: 100%;
+  height: 75vh;
 }
 /* buttons */
 .ezen-btn {
@@ -219,4 +247,15 @@ label.ezen-required::after {
 }
 .w-80 {
   width: 80px !important;
+}
+
+.list-group-item.last-item {
+  padding-bottom: 4px;
+  padding-top: 9px;
+}
+.list-group-item.last-item::before {
+  content: url('/resources/images/icon/ico_add.png');
+}
+.list-group-item.active.last-item::before {
+  content: url('/resources/images/icon/ico_add_over.png');
 }

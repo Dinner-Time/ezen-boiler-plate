@@ -58,7 +58,8 @@ public class Menu extends BaseTimeEntity {
     private String menuDesc;
 
     @Column(name = "REDIRECT_URL", nullable = false)
-    private String redirectUrl;
+    @Builder.Default
+    private String redirectUrl = "/";
 
     // 연관관계 매핑(** 메뉴 테이블은 자기 자신을 참조하는 테이블이다.)
     // @ManyToOne : 다대일 관계 매핑

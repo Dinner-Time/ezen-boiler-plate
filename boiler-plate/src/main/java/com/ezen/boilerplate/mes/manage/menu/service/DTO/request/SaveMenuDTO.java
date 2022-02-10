@@ -1,9 +1,8 @@
 package com.ezen.boilerplate.mes.manage.menu.service.DTO.request;
 
-import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
-
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 메뉴 정보 저장 객체
@@ -24,6 +23,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class SaveMenuDTO {
 
     // 메뉴 번호(pk)
@@ -37,5 +37,5 @@ public class SaveMenuDTO {
     // 연결된 페이지
     private String redirectUrl;
     // 상위 메뉴
-    private Menu parentMenu;
+    private String masterMenu;
 }

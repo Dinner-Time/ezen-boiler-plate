@@ -1,5 +1,6 @@
 package com.ezen.boilerplate;
 
+import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
 import com.ezen.boilerplate.mes.manage.menu.domain.MenuRepository;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,14 @@ public class MenuSaveTest {
 
     @Test
     public void insert() {
+        for (int i = 0; i < 20; i++) {
+            int menuNo = 301 + i;
 
+            menuRepository.save(Menu.builder()//
+                    .menuNo(String.valueOf(menuNo))//
+                    .menuNm("test" + i)//
+                    .parentMenu(menuRepository.findById("300").get())//
+                    .build());
+        }
     }
 }

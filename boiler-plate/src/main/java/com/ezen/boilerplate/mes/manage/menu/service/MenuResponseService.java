@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
 import com.ezen.boilerplate.mes.manage.menu.domain.MenuRepository;
+import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.DetailMenuDTO;
 import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.LeveledMenuDTO;
+import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.ListOfMenuDTO;
 import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.SelectedMenuDTO;
 
 import org.springframework.stereotype.Service;
@@ -75,5 +78,36 @@ public class MenuResponseService {
         result.put("parent", parentsDTO);
         result.put("children", childrenDTO);
         return result;
+    }
+
+    /**
+     * 한 건 조회
+     * 
+     * @param menuNo
+     * @return
+     */
+    public DetailMenuDTO findByMenuNo(String menuNo) {
+        Optional<Menu> entity = menuRepository.findById(menuNo);
+
+        DetailMenuDTO result = entity.isPresent() ? new DetailMenuDTO(entity.get()) : new DetailMenuDTO();
+
+        return result;
+    }
+
+    /**
+     * 
+     * 하위메뉴 전체 조회
+     */
+    public List<ListOfMenuDTO> findAll() {
+
+        List<Menu> entities = menuRepository.findByParentMenuIsNotNullOrderByMenuOrder();
+
+        List<ListOfMenuDTO> dtos = new ArrayList<ListOfMenuDTO>();
+
+        for (Menu m : entities) {
+            dtos.add(new ListOfMenuDTO(m));
+        }
+
+        return dtos;
     }
 }
