@@ -65,6 +65,7 @@ addDetailCode.addEventListener('click', () => {
 saveBtn.addEventListener('click', (e) => {
   // 현재 탭에 따라 서로 다른 function 호출
   const currentTabId = document.querySelector('.tab-pane.show.active').id;
+  console.log(currentTabId);
   currentTabId === 'detail-code' ? saveChildrenCode(detailGrid, masterGrid.selectedRow.codeId) : saveMasterCodeInfo(e, codeDataForm);
 });
 

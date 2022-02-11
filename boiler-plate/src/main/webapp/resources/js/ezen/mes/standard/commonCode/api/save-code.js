@@ -38,7 +38,7 @@ async function saveChildrenCode(grid, masterCodeId) {
 // 코드 정보 저장
 async function saveMasterCodeInfo(e, form) {
   const { target } = e;
-  if (!vaildateRequestData(target.id)) return; // 유효성 검사 이후 저장 실행
+  if (vaildateRequestData(target.id)) return; // 유효성 검사 이후 저장 실행
 
   /**
    * request data
