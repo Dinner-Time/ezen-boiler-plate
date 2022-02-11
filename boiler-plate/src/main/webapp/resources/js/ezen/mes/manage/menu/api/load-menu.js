@@ -1,35 +1,98 @@
 import { getFetch } from '../../../../util/defined-fetches.js';
+import { form, delBtn } from '../DOM/reusable-DOMs.js';
 
 async function loadListOfMenu() {
   const data = await getFetch('/manage/menu/all');
 
-  const listOfMasterMenus = document.querySelectorAll('[data-bs-parent="#menuManageAccordion"] .list-group-flush');
+  const menuContainerList = document.querySelectorAll('[data-bs-parent="#menuManageAccordion"] .list-group-flush');
 
-  [...listOfMasterMenus].forEach((menu) => {
-    while (menu.hasChildNodes()) {
-      menu.removeChild(menu.firstChild);
+  // 자식 tag clear
+  initContainer(menuContainerList);
+
+  // 받아온 data로 자식태그 생성 및 추가
+  const listItemList = setChildMenuList(data);
+
+  // 메뉴 추가용 빈 메뉴 생성 및 추가
+  const lastListItemList = setAddMenu(menuContainerList);
+
+  // 클릭 이벤트 추가
+  [...listItemList, ...lastListItemList].forEach((item) => {
+    item.addEventListener('click', clickEventHandler);
+  });
+}
+
+/**
+ * 자식 tag clear
+ *
+ * @param {*} containerList
+ */
+function initContainer(containerList) {
+  [...containerList].forEach((container) => {
+    while (container.hasChildNodes()) {
+      container.removeChild(container.firstChild);
     }
   });
+}
+
+/**
+ *
+ *
+ * @param {*} data
+ */
+function setChildMenuList(data) {
+  const listItemList = [];
 
   data.forEach((menu) => {
-    const masterMenu = document.querySelector(`#menu-manage-${menu.masterMenu} .list-group-flush`);
+    const container = document.querySelector(`#menu-manage-${menu.masterMenu} .list-group-flush`);
 
     const listItem = document.createElement('button');
     listItem.classList = 'btn list-group-item list-group-item-action';
     listItem.dataset.menuNo = menu.menuNo;
     listItem.innerText = menu.menuNm;
 
-    masterMenu.append(listItem);
+    listItemList.push(listItem);
+    container.append(listItem);
   });
 
-  [...listOfMasterMenus].forEach((menu) => {
-    const lastListItem = document.createElement('button');
-    lastListItem.classList = 'btn list-group-item list-group-item-action last-item';
-    menu.append(lastListItem);
-  });
+  return listItemList;
 }
 
-async function loadMenuData(elem, form) {
+/**
+ *
+ *
+ * @param {*} containerList
+ */
+function setAddMenu(containerList) {
+  const listItemList = [];
+
+  [...containerList].forEach((menu) => {
+    const lastListItem = document.createElement('button');
+    lastListItem.classList = 'btn list-group-item list-group-item-action last-item';
+
+    listItemList.push(lastListItem);
+    menu.append(lastListItem);
+  });
+
+  return listItemList;
+}
+
+/**
+ *
+ *
+ * @param {*} e
+ */
+function clickEventHandler(e) {
+  const { target } = e;
+
+  const actived = document.querySelector('#menuManageAccordion .list-group-item.active');
+  if (actived) actived.classList.remove('active');
+
+  target.classList.add('active');
+
+  loadMenuData(target);
+}
+
+async function loadMenuData(elem) {
   const { masterMenu, menuNo, menuNm, menuOrder, menuDesc, redirectUrl } = form;
 
   masterMenu.value = await findMasterMenuNo(elem);
@@ -40,14 +103,10 @@ async function loadMenuData(elem, form) {
   [menuNm, menuOrder, menuDesc, redirectUrl].forEach((elem) => {
     const { name } = elem;
     elem.value = data[name];
+    if (elem === menuDesc) menuDesc.closest('limited-textarea').setValue(data[name]);
   });
 
-  const delBtn = document.querySelector('#deleteBtn');
-  if (menuNm.value) {
-    delBtn.style.display = 'block';
-  } else {
-    delBtn.style.display = 'none';
-  }
+  !menuNm.value ? (delBtn.style.display = 'none') : (delBtn.style.display = 'block');
 }
 
 async function findMasterMenuNo(elem) {
@@ -69,4 +128,4 @@ async function findChildMenuNo(elem, masterMenuNo) {
   return Number(masterMenuNo) + 1;
 }
 
-export { loadMenuData, loadListOfMenu };
+export { loadListOfMenu };

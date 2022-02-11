@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Embeddable
 public class DetailCodeId implements Serializable {
-    @Column(name = "CODE_ID", length = 6)
+    @Column(name = "CODE_ID")
     private String codeId;
 
     private String masterCodeId;

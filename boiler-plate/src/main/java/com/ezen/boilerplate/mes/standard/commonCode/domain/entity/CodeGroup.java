@@ -41,15 +41,15 @@ public class CodeGroup extends BaseTimeEntity {
 
     // 코드 ID
     @Id
-    @Column(name = "CODE_ID", length = 6)
+    @Column(name = "CODE_ID")
     private String codeId;
 
     // 코드 이름
-    @Column(name = "CODE_NM", length = 20, nullable = false)
+    @Column(name = "CODE_NM", nullable = false)
     private String codeNm;
 
     // 코드 설명
-    @Column(name = "CODE_DESC", length = 255, nullable = true)
+    @Column(name = "CODE_DESC", nullable = true)
     private String codeDesc;
 
     // 0: not use, 1: use

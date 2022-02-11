@@ -6,6 +6,12 @@
   font-size: 14px;
 }
 
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* scroll custom */
 /* width */
 ::-webkit-scrollbar {

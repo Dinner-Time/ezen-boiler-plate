@@ -3,16 +3,12 @@
  * @author 박태훈
  * @since 2022-01-25
  */
-// 유효성 검사
 import { vaildateRequestData } from '../util/vaildation.js';
-// method
 import RequestMethod from '../util/request-method.js';
-// 쿠키
 import Cookie from '../util/cookie.js';
-// 날짜 util
 import { getDate } from '../util/date.js';
-
 import { keyUpEnterHandler } from '../util/event-handlers.js';
+
 /**
  * 로그인 실패 시 처리
  */
@@ -47,7 +43,11 @@ password.addEventListener('keyup', (e) => keyUpEnterHandler(e, loginBtn));
  */
 function loginClickHandler({ target }) {
   // 유효성 검사 실행
-  if (!vaildateRequestData(target.id)) return;
+  const vaildation = vaildateRequestData(target.id);
+  if (vaildation) {
+    vaildation.name === 'userId' ? toastr.warning('아이디가 입력되지 않았습니다.') : toastr.warning('비밀번호가 입력되지 않았습니다.');
+    return;
+  }
   // 로그인 form 선택
   const form = document.querySelector('#loginForm');
   // id 저장

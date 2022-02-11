@@ -15,12 +15,13 @@
   <script src="/resources/js/toastr/toastr.min.js" defer></script>
   <script src="/resources/js/toastr/toastr.option.js" defer></script>
 
+  <!-- toast grid -->
+  <link rel="stylesheet" href="/resources/css/toast-components/tui-grid.css" />
+  <script src="/resources/js/toast-components/tui-grid.js" defer></script>
+
   <!-- Util css, javascript -->
   <link rel="stylesheet" href="/resources/css/ezen/common.css" />
   <script type="module" src="/resources/js/ezen/layout/template.js" defer></script>
 
-  <!-- toast grid -->
-  <link rel="stylesheet" href="/resources/css/toast-components/tui-grid.css" />
-  <script src="/resources/js/toast-components/tui-grid.js" defer></script>
   <title>MES</title>
 </head>

@@ -5,8 +5,9 @@
  */
 'use strict'; // 엄격 모드 실행
 
-import { setValidationStyle, checkLimitText } from '../../../util/vaildation.js';
+import { setValidationStyle } from '../../../util/vaildation.js';
 import { keyUpEnterHandler } from '../../../util/event-handlers.js';
+import { LimitedTextArea } from '../../../util/web-components.js';
 
 import { masterGrid, detailGrid, masterGridClickHandler } from './grid/grid.js';
 import { loadGroupCodeList } from './api/load-code.js';
@@ -32,7 +33,7 @@ const addDetailCode = document.querySelector('#addDetailCode'); // 코드 추가
  * 화면 로드 이후 바로 호출하는 함수
  */
 setValidationStyle(saveBtn.id); // 유효성 검사가 필요한 태그 style
-checkLimitText(codeDataForm.codeDesc, 60); // 글자 수 제한 style 및 기능
+customElements.define('limited-textarea', LimitedTextArea);
 loadGroupCodeList(masterGrid); // 그룹 코드 load 및 선택한 그룹 코드에 해당하는 코드 목록 load
 
 /**

@@ -81,7 +81,7 @@
       <!-- tab content -->
       <div class="tab-content ezen-tab-content py-4 px-2" id="nav-tabContent">
         <div class="tab-pane fade show active" id="menuManageTabBody" role="tabpanel" aria-labelledby="menuManageTab">
-          <form id="meunManageForm" class="row" action="">
+          <form id="menuManageForm" class="row">
             <div class="col-12 mb-4">
               <div class="d-flex align-items-center">
                 <label for="masterMenu">상위 메뉴</label>
@@ -118,9 +118,7 @@
             </div>
             <div class="col-12">
               <span>메뉴 설명</span>
-              <div class="form-floating">
-                <textarea class="form-control ezen-input-text mt-2" id="menuDesc" name="menuDesc" style="resize: none; height: 100px"></textarea>
-              </div>
+              <limited-textarea id="menuDesc" name="menuDesc" height="100px" limit="255"></limited-textarea>
             </div>
           </form>
         </div>

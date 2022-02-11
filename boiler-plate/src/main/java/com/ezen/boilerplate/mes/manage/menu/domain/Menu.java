@@ -45,21 +45,20 @@ import lombok.NoArgsConstructor;
 public class Menu extends BaseTimeEntity {
 
     @Id
-    @Column(name = "MENU_NO", length = 10)
+    @Column(name = "MENU_NO")
     private String menuNo;
 
-    @Column(name = "MENU_NM", length = 150, nullable = false)
+    @Column(name = "MENU_NM", nullable = false)
     private String menuNm;
 
-    @Column(name = "MENU_ORDR", length = 2, nullable = false)
+    @Column(name = "MENU_ORDR", nullable = false)
     private int menuOrder;
 
     @Column(name = "MENU_DESC")
     private String menuDesc;
 
     @Column(name = "REDIRECT_URL", nullable = false)
-    @Builder.Default
-    private String redirectUrl = "/";
+    private String redirectUrl;
 
     // 연관관계 매핑(** 메뉴 테이블은 자기 자신을 참조하는 테이블이다.)
     // @ManyToOne : 다대일 관계 매핑

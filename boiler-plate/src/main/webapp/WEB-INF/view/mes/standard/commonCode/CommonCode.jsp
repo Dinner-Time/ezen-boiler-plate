@@ -101,7 +101,10 @@
       <div class="tab-content ezen-tab-content" id="nav-tabContent">
         <!-- 하위코드 리스트 -->
         <div class="tab-pane fade show active" id="detail-code" role="tabpanel" aria-labelledby="detail-code-tab">
-          <button id="addDetailCode" class="btn btn-outline-primary ezen-btn my-2" style="float: right">코드 추가</button>
+          <div class="my-2" style="float: right">
+            <button id="addDetailCode" class="btn btn-outline-primary mx-2">추가</button>
+            <button id="deleteDetailCode" class="btn btn-outline-danger">삭제</button>
+          </div>
           <div id="detailGrid"></div>
         </div>
         <!-- 하위코드 리스트 -->
@@ -128,11 +131,9 @@
                 </tr>
 
                 <tr>
-                  <th scope="row"><label for="codeDesc">코드설명</label></th>
+                  <th scope="row"><span>메뉴 설명</span></th>
                   <td>
-                    <div class="form-floating">
-                      <textarea class="form-control ezen-input-text" id="codeDesc" name="codeDesc" rows="2" style="resize: none"></textarea>
-                    </div>
+                    <limited-textarea id="codeDesc" name="codeDesc" height="60px" limit="60"></limited-textarea>
                   </td>
                 </tr>
 

@@ -5,11 +5,15 @@
  */
 const error = {
   UNKNOWN: '알 수 없는 에러가 발생했습니다.',
-  CHECK_INPUT: '비어있거나 잘못된 값이 있습니다.',
+
+  REQUIRED_UNFULFILLED: '필수 정보가 누락되었습니다.',
   INVALID: '저장할 수 없는 값이 있습니다.',
   OUT_OF_TEXT_LIMIT: '입력 제한을 초과하였습니다.',
+
   SAVE_ERROR: '저장에 실패하였습니다.',
-  SAVE_SUCCESS: '저장에 성공하였습니다.',
+  SAVE_SUCCESS: '저장이 정상적으로 완료되었습니다.',
+  DELETE_ERROR: '삭제에 실패하였습니다.',
+  DELETE_SUCCESS: '삭제가 정상적으로 완료되었습니다.',
 
   /**
    * 발생한 에러 log

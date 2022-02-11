@@ -5,6 +5,8 @@
  */
 'use strict'; // 엄격 모드 실행
 
+import ErrorMessage from './error-message.js';
+
 /**
  * web component 예시
  */
@@ -238,6 +240,10 @@ export class EzenSelect extends HTMLElement {
       option.dataset.value === value ? option.click() : '';
     });
   }
+
+  reset() {
+    this.dropdownProps.options[0].click();
+  }
 }
 
 /**
@@ -288,5 +294,103 @@ export class MenuNavigation extends HTMLElement {
 
     wrap.append(title, navWrap);
     this.append(wrap);
+
+    if (window.innerWidth > 1810) this.openSelectedMenu();
+  }
+
+  openSelectedMenu() {
+    document.querySelector('.ezen-toggle-menu').click();
+
+    const menus = document.querySelectorAll('.offcanvas-body span');
+    const menu = [...menus].filter((elem) => elem.innerText.includes(this.child))[0];
+
+    const menuContainer = menu.closest('.collapse');
+    const parentMenu = menuContainer.previousElementSibling.firstElementChild;
+
+    parentMenu.click();
+    menu.parentElement.focus();
+  }
+}
+
+export class LimitedTextArea extends HTMLElement {
+  constructor() {
+    // 클래스 초기화. 속성이나 하위 노드는 접근할 수는 없다.
+    super();
+  }
+
+  static get observedAttributes() {
+    // 모니터링 할 속성 이름
+    // <tag-name example="example"></tag-name>
+    return ['name', 'height', 'limit'];
+  }
+
+  connectedCallback() {
+    // DOM에 추가되었다. 렌더링 등의 처리를 하자.
+    this.render();
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal) {
+    // 속성이 추가/제거/변경되었다.
+    this[attrName] = newVal;
+  }
+
+  render() {
+    const formFloating = document.createElement('div');
+    formFloating.classList = 'form-floating';
+
+    const textarea = document.createElement('textarea');
+    textarea.classList = 'form-control ezen-input-text mt-2';
+    textarea.id = this.id;
+    textarea.name = this.name;
+    textarea.placeholder = this.name;
+    textarea.style.resize = 'none';
+    textarea.style.height = this.height;
+
+    const floatingLabel = document.createElement('label');
+    floatingLabel.setAttribute('for', textarea.id);
+    floatingLabel.innerHTML = `<b>0</b>/${this.limit}bytes`;
+
+    this.removeAttribute('id');
+    this.removeAttribute('name');
+    this.removeAttribute('height');
+
+    this.observing = floatingLabel.firstElementChild;
+    this.textarea = textarea;
+
+    textarea.addEventListener('keyup', (e) => this.checkLimit(e));
+    textarea.addEventListener('keydown', (e) => this.checkLimit(e));
+    textarea.addEventListener('paste', (e) => this.checkLimit(e));
+
+    formFloating.append(textarea, floatingLabel);
+    this.append(formFloating);
+  }
+
+  checkLimit(e) {
+    const { target, key } = e;
+
+    // 입력한 글자 수 확인
+    this.observing.textContent = target.value.length;
+
+    // 입력 글자 수가 제한 글자 수를 넘어선 경우
+    if (target.value.length > Number(this.limit)) {
+      // 삭제중에는 글자수 제한 확인하지 않게 한다.
+      if (key === 'Backspace') return;
+
+      toastr.warning(ErrorMessage.OUT_OF_TEXT_LIMIT); // 알림
+      target.blur(); // focus 제거
+      target.classList.add('is-invalid'); // 스타일을 위한 클래스 추가
+    } else {
+      target.classList.contains('is-invalid') ? this.textarea.classList.remove('is-invalid') : ''; // invalid 클래스 삭제
+    }
+  }
+
+  setValue(value) {
+    this.textarea.value = value;
+    this.checkLimit({ target: this.textarea });
+  }
+
+  reset() {
+    this.textarea.value = '';
+    this.observing.textContent = 0;
   }
 }

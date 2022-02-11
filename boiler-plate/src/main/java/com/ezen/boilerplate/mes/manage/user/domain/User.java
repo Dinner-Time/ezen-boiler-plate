@@ -52,9 +52,9 @@ public class User extends BaseTimeEntity {
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "USER_ID", length = 36)
+    @Column(name = "USER_ID")
     private String userId;
 
-    @Column(name = "PASSWORD", length = 128, nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 }

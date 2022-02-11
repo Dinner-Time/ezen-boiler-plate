@@ -1,5 +1,3 @@
-import { initializeEzenSelect, initializeTextLimit } from '../../../../util/initializations.js';
-
 // 초기화 function
 function initializePage(masterGrid, detailGrid, form, codeNm) {
   const { codeId, codeDesc } = form;
@@ -9,8 +7,12 @@ function initializePage(masterGrid, detailGrid, form, codeNm) {
   codeNm.value = null;
   codeId.removeAttribute('readonly'); // 코드 정보 form의 readonly 삭제
 
-  initializeEzenSelect({ codeGroup: 'MES', isEnabled: '1' }); // custom select 초기화
-  initializeTextLimit(codeDesc); // 텍스트 제한 element 초기화
+  const ezenSelectList = document.querySelectorAll('ezen-select');
+
+  [...ezenSelectList].forEach((select) => select.reset());
+
+  const limitedTextArea = document.querySelector('limited-textarea');
+  if (limitedTextArea) limitedTextArea.reset();
 }
 
 export { initializePage };
