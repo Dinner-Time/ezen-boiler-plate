@@ -34,42 +34,39 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  // 비밀번호 암호화 설정
-  @Bean
-  public BCryptPasswordEncoder passwordEncoder() {
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    return bCryptPasswordEncoder;
-  }
+    // 비밀번호 암호화 설정
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
 
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    // 해당 경로에는 security 가 모두 무시할 수 있도록 설정
-    web.ignoring().antMatchers("/resources/**");
-  }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 해당 경로에는 security 가 모두 무시할 수 있도록 설정
+        web.ignoring().antMatchers("/resources/**");
+    }
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.csrf()
-        .disable() // csrf 미적용
-        .authorizeRequests() // 접근 권한 설정
-        .antMatchers("/login/**").permitAll() // 로그인 페이지 모두 접속 가능
-        .antMatchers("/error").permitAll() // 에러 페이지 모두 접속 가능
-        .antMatchers("/**").authenticated() // 이 외의 페이지 허용된 사용자만 접속 가능
-        //
-        .and()
-        .formLogin() // form로그인 기반으로 인증
-        .loginPage("/login") // 로그인 페이지로 이동
-        .usernameParameter("userId") // username parameter custom
-        .passwordParameter("password") // password parameter custom
-        .loginProcessingUrl("/login/process") // login을 실행할 URL
-        .successHandler(new LoginSuccessHandler()) // login 성공시 실행
-        .failureHandler(new LoginFailureHandler()) // login 실패시 실행
-        //
-        .and()
-        .logout() // 로그아웃
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 실행 URL
-        .logoutSuccessUrl("/login") // 로그아웃 성공시 이동할 페이지
-        .invalidateHttpSession(true) // 세션 종료
-    ;
-  }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable() // csrf 미적용
+                .authorizeRequests() // 접근 권한 설정
+                .antMatchers("/login/**").permitAll() // 로그인 페이지 모두 접속 가능
+                .antMatchers("/error").permitAll() // 에러 페이지 모두 접속 가능
+                .antMatchers("/**").authenticated() // 이 외의 페이지 허용된 사용자만 접속 가능
+                //
+                .and().formLogin() // form로그인 기반으로 인증
+                .loginPage("/login") // 로그인 페이지로 이동
+                .usernameParameter("userId") // username parameter custom
+                .passwordParameter("password") // password parameter custom
+                .loginProcessingUrl("/login/process") // login을 실행할 URL
+                .successHandler(new LoginSuccessHandler()) // login 성공시 실행
+                .failureHandler(new LoginFailureHandler()) // login 실패시 실행
+                //
+                .and().logout() // 로그아웃
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 실행 URL
+                .logoutSuccessUrl("/login") // 로그아웃 성공시 이동할 페이지
+                .invalidateHttpSession(true) // 세션 종료
+        ;
+    }
 }

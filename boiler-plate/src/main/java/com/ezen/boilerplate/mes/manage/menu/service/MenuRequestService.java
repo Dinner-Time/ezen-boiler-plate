@@ -21,9 +21,9 @@ public class MenuRequestService {
     public int save(SaveMenuDTO dto) {
         int result = 0;
 
-        Optional<Menu> parent = menuRepository.findById(dto.getMasterMenu());
+        Optional<Menu> masterMenu = getMasterMenu(dto.getMasterMenu());
 
-        if (!parent.isPresent()) {
+        if (masterMenu != null && !masterMenu.isPresent()) {
             return result;
         }
 
@@ -33,10 +33,18 @@ public class MenuRequestService {
                 .menuOrder(dto.getMenuOrder()) //
                 .menuDesc(dto.getMenuDesc()) //
                 .redirectUrl(dto.getRedirectUrl()) //
-                .parentMenu(parent.get()) //
+                .parentMenu(masterMenu == null ? null : masterMenu.get()) //
                 .build());
 
         return ++result;
+    }
+
+    private Optional<Menu> getMasterMenu(String masterMenuNo) {
+        if (masterMenuNo == null) {
+            return null;
+        }
+
+        return menuRepository.findById(masterMenuNo);
     }
 
     public int deleteOne(String menuNo) {
