@@ -25,5 +25,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *      </pre>
  */
 public interface DetailCodeRepository extends JpaRepository<DetailCode, String> {
-    List<DetailCode> findByMasterCode(MasterCode masterCode);
+    List<DetailCode> findByIdMasterCode(String masterCode);
 }

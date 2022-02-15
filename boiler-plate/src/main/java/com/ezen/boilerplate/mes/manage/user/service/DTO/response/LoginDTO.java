@@ -3,7 +3,7 @@ package com.ezen.boilerplate.mes.manage.user.service.DTO.response;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.ezen.boilerplate.mes.manage.user.domain.User;
+import com.ezen.boilerplate.mes.manage.user.domain.entity.User;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 로그인 객체
@@ -32,12 +33,15 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @NoArgsConstructor
+@ToString
 public class LoginDTO implements UserDetails {
 
     // 사용자 Id
     private String userId;
     // 비밀번호
     private String password;
+    // 권한
+    private String role;
 
     /**
      * 로그인 시 사용하는 객체
@@ -47,6 +51,7 @@ public class LoginDTO implements UserDetails {
     public LoginDTO(User entity) {
         this.userId = entity.getUserId();
         this.password = entity.getPassword();
+        this.role = entity.getRole();
     }
 
     // 로그인 ID
@@ -67,7 +72,7 @@ public class LoginDTO implements UserDetails {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
         // 유저 별 추가할 권한 관리
-        authorities.add(new SimpleGrantedAuthority("Role"));
+        authorities.add(new SimpleGrantedAuthority(this.role));
         return authorities;
     }
 

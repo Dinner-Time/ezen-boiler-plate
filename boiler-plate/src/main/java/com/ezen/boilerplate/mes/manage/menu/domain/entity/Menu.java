@@ -1,13 +1,8 @@
-package com.ezen.boilerplate.mes.manage.menu.domain;
-
-import java.util.List;
+package com.ezen.boilerplate.mes.manage.menu.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ezen.boilerplate.common.domain.BaseTimeEntity;
@@ -60,16 +55,6 @@ public class Menu extends BaseTimeEntity {
     @Column(name = "REDIRECT_URL", nullable = false)
     private String redirectUrl;
 
-    // 연관관계 매핑(** 메뉴 테이블은 자기 자신을 참조하는 테이블이다.)
-    // @ManyToOne : 다대일 관계 매핑
-    // => 객체 관점에서 부모 class
-    @ManyToOne
-    @JoinColumn(name = "PAR_MENU_NO")
-    private Menu parentMenu; // 부모 entity 타입으로 변수를 생성한다.
-
-    // @OneToMany : 일대다 관계 매핑
-    // => 객체 관점에서 자식 class
-    @OneToMany(mappedBy = "parentMenu")
-    private List<Menu> childMenu; // 자기 자신 entity타입을 담는 collection 변수를 생성한다.
-
+    @Column(name = "MASTER_MENU")
+    private String masterMenu;
 }

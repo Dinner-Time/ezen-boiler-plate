@@ -1,6 +1,8 @@
-package com.ezen.boilerplate.mes.manage.menu.domain;
+package com.ezen.boilerplate.mes.manage.menu.domain.repository;
 
 import java.util.List;
+
+import com.ezen.boilerplate.mes.manage.menu.domain.entity.Menu;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -22,11 +24,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *      </pre>
  */
 public interface MenuRepository extends JpaRepository<Menu, String> {
-    // Menu entity의 parentMenu가 null이 아닌 행 select
-    public List<Menu> findByParentMenuIsNotNullOrderByMenuOrder();
+    // Menu entity의 masterMenu가 null이 아닌 행 select
+    public List<Menu> findByMasterMenuIsNotNullOrderByMenuOrder();
 
-    // Menu entity의 parentMenu가 null인 행 select
-    public List<Menu> findByParentMenuIsNullOrderByMenuOrder();
+    // Menu entity의 masterMenu가 null인 행 select
+    public List<Menu> findByMasterMenuIsNullOrderByMenuOrder();
 
     // 한 건 조회
     public Menu findByMenuNo(String menuNo);

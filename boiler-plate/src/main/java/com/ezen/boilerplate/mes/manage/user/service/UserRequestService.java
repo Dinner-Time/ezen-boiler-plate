@@ -1,7 +1,7 @@
 package com.ezen.boilerplate.mes.manage.user.service;
 
-import com.ezen.boilerplate.mes.manage.user.domain.User;
-import com.ezen.boilerplate.mes.manage.user.domain.UserRepository;
+import com.ezen.boilerplate.mes.manage.user.domain.entity.User;
+import com.ezen.boilerplate.mes.manage.user.domain.repository.UserRepository;
 import com.ezen.boilerplate.mes.manage.user.service.DTO.request.SignUpDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

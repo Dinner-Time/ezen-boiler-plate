@@ -1,7 +1,7 @@
 package com.ezen.boilerplate.mes.manage.user.service;
 
-import com.ezen.boilerplate.mes.manage.user.domain.User;
-import com.ezen.boilerplate.mes.manage.user.domain.UserRepository;
+import com.ezen.boilerplate.mes.manage.user.domain.entity.User;
+import com.ezen.boilerplate.mes.manage.user.domain.repository.UserRepository;
 import com.ezen.boilerplate.mes.manage.user.service.DTO.response.LoginDTO;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,6 +46,13 @@ public class UserResponseService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         User user = userRepository.findByUserId(userId);
-        return new LoginDTO(user);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("no user");
+        }
+        LoginDTO loginUser = new LoginDTO(user);
+
+        System.out.println(loginUser.toString());
+        return loginUser;
     }
 }

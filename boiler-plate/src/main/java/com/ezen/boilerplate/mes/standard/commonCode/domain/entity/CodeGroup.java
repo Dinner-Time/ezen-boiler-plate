@@ -1,12 +1,12 @@
 package com.ezen.boilerplate.mes.standard.commonCode.domain.entity;
 
-import com.ezen.boilerplate.common.domain.BaseTimeEntity;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.ezen.boilerplate.common.domain.BaseTimeEntity;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "COMMON_CODE_CATEGORY" // 테이블 이름
+@Table(name = "COMMON_CODE_GROUP" // 테이블 이름
 )
 public class CodeGroup extends BaseTimeEntity {
 
@@ -52,11 +52,8 @@ public class CodeGroup extends BaseTimeEntity {
     @Column(name = "CODE_DESC", nullable = true)
     private String codeDesc;
 
+    // 사용 여부
     // 0: not use, 1: use
-    @Column(name = "IS_ENABLED", nullable = false)
-    private int isEnabled;
-
-    // 자식 객체에 저장되어 있는 @ManyToOne 변수
-    @OneToMany(mappedBy = "codeGroup")
-    private List<MasterCode> codes;
+    @Column(name = "USE_YN", nullable = false)
+    private int useYn;
 }

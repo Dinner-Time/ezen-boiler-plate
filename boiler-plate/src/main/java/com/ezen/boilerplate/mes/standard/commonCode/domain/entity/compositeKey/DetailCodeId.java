@@ -34,5 +34,6 @@ public class DetailCodeId implements Serializable {
     @Column(name = "CODE_ID")
     private String codeId;
 
-    private String masterCodeId;
+    @Column(name = "MASTER_CODE")
+    private String masterCode;
 }

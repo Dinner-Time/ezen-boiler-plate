@@ -24,5 +24,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *      </pre>
  */
 public interface CodeGroupRepository extends JpaRepository<CodeGroup, String> {
-    List<CodeGroup> findByIsEnabledOrderByCreatedTime(int isEnabled);
+    List<CodeGroup> findByUseYnOrderByCreatedTime(int useYn);
 }

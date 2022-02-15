@@ -1,6 +1,6 @@
 package com.ezen.boilerplate.mes.manage.menu.service.DTO.response;
 
-import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
+import com.ezen.boilerplate.mes.manage.menu.domain.entity.Menu;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +31,7 @@ public class LeveledMenuDTO {
     // 메뉴이름
     private String menuNm;
     // 상위메뉴
-    private Menu parentMenu;
+    private String parentMenu;
     // 이동할 url
     private String redirectUrl;
 
@@ -39,7 +39,7 @@ public class LeveledMenuDTO {
     public LeveledMenuDTO(Menu entity) {
         this.menuNo = entity.getMenuNo();
         this.menuNm = entity.getMenuNm();
-        this.parentMenu = entity.getParentMenu();
+        this.parentMenu = entity.getMasterMenu();
         this.redirectUrl = entity.getRedirectUrl();
     }
 }

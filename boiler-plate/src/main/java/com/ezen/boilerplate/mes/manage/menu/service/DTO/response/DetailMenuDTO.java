@@ -1,6 +1,6 @@
 package com.ezen.boilerplate.mes.manage.menu.service.DTO.response;
 
-import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
+import com.ezen.boilerplate.mes.manage.menu.domain.entity.Menu;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

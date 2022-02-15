@@ -54,14 +54,14 @@ public class CommonCodeResponse {
         List<CodeGroupListDTO> result = new ArrayList<CodeGroupListDTO>();
 
         // DB에서 CodeGroup 조회
-        List<CodeGroup> entities = codeGroupRepository.findByIsEnabledOrderByCreatedTime(1);
+        List<CodeGroup> entities = codeGroupRepository.findByUseYnOrderByCreatedTime(1);
 
         // 조회 결과가 없을 경우 빈 List return
         if (entities.size() == 0) {
             return result;
         }
 
-        // entity => DTO 
+        // entity => DTO
         for (CodeGroup entity : entities) {
             result.add(new CodeGroupListDTO(entity));
         }
@@ -93,7 +93,7 @@ public class CommonCodeResponse {
             return result;
         }
 
-        // entity => DTO 
+        // entity => DTO
         for (MasterCode entity : entities) {
             result.add(new MasterCodeListDTO(entity));
         }
@@ -118,14 +118,14 @@ public class CommonCodeResponse {
         }
 
         // 조회한 MasterCode로 DetailCode조회
-        List<DetailCode> entities = detailCodeRepository.findByMasterCode(masterCode.get());
+        List<DetailCode> entities = detailCodeRepository.findByIdMasterCode(masterCode.get().getCodeId());
 
         // DetailCode 조회 결과가 없을 경우 빈 List return
         if (entities.size() == 0) {
             return result;
         }
 
-        // entity => DTO 
+        // entity => DTO
         for (DetailCode entity : entities) {
             result.add(new DetailCodeListDTO(entity));
         }

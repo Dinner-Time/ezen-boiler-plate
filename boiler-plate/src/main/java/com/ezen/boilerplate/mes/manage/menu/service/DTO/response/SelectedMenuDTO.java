@@ -1,6 +1,6 @@
 package com.ezen.boilerplate.mes.manage.menu.service.DTO.response;
 
-import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
+import com.ezen.boilerplate.mes.manage.menu.domain.entity.Menu;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ public class SelectedMenuDTO {
 
     // 생성자
     public SelectedMenuDTO(Menu entity) {
-        this.parentMenu = entity.getParentMenu().getMenuNm();
+        this.parentMenu = entity.getMasterMenu();
         this.childMenu = entity.getMenuNm();
     }
 }

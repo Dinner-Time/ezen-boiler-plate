@@ -1,9 +1,7 @@
 package com.ezen.boilerplate.mes.manage.menu.service;
 
-import java.util.Optional;
-
-import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
-import com.ezen.boilerplate.mes.manage.menu.domain.MenuRepository;
+import com.ezen.boilerplate.mes.manage.menu.domain.entity.Menu;
+import com.ezen.boilerplate.mes.manage.menu.domain.repository.MenuRepository;
 import com.ezen.boilerplate.mes.manage.menu.service.DTO.request.SaveMenuDTO;
 
 import org.springframework.stereotype.Service;
@@ -21,30 +19,21 @@ public class MenuRequestService {
     public int save(SaveMenuDTO dto) {
         int result = 0;
 
-        Optional<Menu> masterMenu = getMasterMenu(dto.getMasterMenu());
-
-        if (masterMenu != null && !masterMenu.isPresent()) {
+        try {
+            menuRepository.save(Menu.builder()//
+                    .menuNo(dto.getMenuNo()) //
+                    .menuNm(dto.getMenuNm()) //
+                    .menuOrder(dto.getMenuOrder()) //
+                    .menuDesc(dto.getMenuDesc()) //
+                    .redirectUrl(dto.getRedirectUrl()) //
+                    .masterMenu(dto.getMasterMenu()) //
+                    .build());
+        } catch (Exception e) {
+            e.printStackTrace();
             return result;
         }
 
-        menuRepository.save(Menu.builder()//
-                .menuNo(dto.getMenuNo()) //
-                .menuNm(dto.getMenuNm()) //
-                .menuOrder(dto.getMenuOrder()) //
-                .menuDesc(dto.getMenuDesc()) //
-                .redirectUrl(dto.getRedirectUrl()) //
-                .parentMenu(masterMenu == null ? null : masterMenu.get()) //
-                .build());
-
         return ++result;
-    }
-
-    private Optional<Menu> getMasterMenu(String masterMenuNo) {
-        if (masterMenuNo == null) {
-            return null;
-        }
-
-        return menuRepository.findById(masterMenuNo);
     }
 
     public int deleteOne(String menuNo) {
@@ -52,8 +41,7 @@ public class MenuRequestService {
 
         try {
             menuRepository.deleteById(menuNo);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return result;
         }

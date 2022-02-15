@@ -8,7 +8,7 @@
   align-items: flex-start;
 }
 .ezen-menu-wrapper .offcanvas-title {
-  background: url('/resources/images/logo/adwinner_login_logo.png');
+  /* background: url('/resources/images/logo/adwinner_login_logo.png'); */
   background-position: center;
   background-size: auto;
   background-repeat: no-repeat;

@@ -1,12 +1,9 @@
-package com.ezen.boilerplate.mes.manage.user.domain;
+package com.ezen.boilerplate.mes.manage.user.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.ezen.boilerplate.common.domain.BaseTimeEntity;
 
@@ -40,21 +37,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "USER_INFO", // 테이블 이름
-        uniqueConstraints = { // unique 제약조건 설정
-                @UniqueConstraint(name = "UNIQUE_USER_ID", // unique 제약조건 이름
-                        columnNames = { "USER_ID" } // 적용할 칼럼 이름
-                ), })
+@Table(name = "USER_INFO" // 테이블 이름
+)
 public class User extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private Long id;
+        // 사용자 로그인 ID
+        @Id
+        @Column(name = "USER_ID")
+        private String userId;
 
-    @Column(name = "USER_ID")
-    private String userId;
+        // 사용자 비밀번호(초기비밀번호 0000)
+        @Column(name = "PASSWORD", nullable = false)
+        private String password;
 
-    @Column(name = "PASSWORD", nullable = false)
-    private String password;
+        // 사용자 권한
+        @Column(name = "ROLE", nullable = false)
+        private String role;
+
+        // 사용자 그룹(그룹 별 권한 변경 가능)
+        @Column(name = "USER_GROUP")
+        private String group;
 }

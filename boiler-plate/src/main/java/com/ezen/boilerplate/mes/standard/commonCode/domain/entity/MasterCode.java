@@ -1,13 +1,8 @@
 package com.ezen.boilerplate.mes.standard.commonCode.domain.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ezen.boilerplate.common.domain.BaseTimeEntity;
@@ -48,9 +43,8 @@ public class MasterCode extends BaseTimeEntity {
     @Column(name = "CODE_ID")
     private String codeId;
 
-    @ManyToOne
-    @JoinColumn(name = "CODE_CATEGORY")
-    private CodeGroup codeGroup;
+    @Column(name = "CODE_GROUP")
+    private String codeGroup;
 
     // 코드 이름
     @Column(name = "CODE_NM", nullable = false)
@@ -61,10 +55,6 @@ public class MasterCode extends BaseTimeEntity {
     private String codeDesc;
 
     // 0: not use, 1: use
-    @Column(name = "IS_ENABLED", nullable = false)
+    @Column(name = "USE_YN", nullable = false)
     private int isEnabled;
-
-    // 자식 객체에 저장되어 있는 @ManyToOne 변수
-    @OneToMany(mappedBy = "masterCode")
-    private List<DetailCode> codes;
 }

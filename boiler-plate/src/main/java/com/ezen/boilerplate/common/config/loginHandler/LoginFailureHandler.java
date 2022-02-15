@@ -34,15 +34,12 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 
   @Override
-  public void onAuthenticationFailure(
-      HttpServletRequest request,
-      HttpServletResponse response,
+  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
       AuthenticationException exception) throws IOException, ServletException {
 
     /**
-     * session을 활용하여 flashAttribute 구현
-     * -- loginFailureHandler에서 session에 flashAttribute를 담는다.
-     * -- redirect되는 controller에서 필요한 처리를 완료한 이후 session의 flashAttribute를 삭제한다.
+     * session을 활용하여 flashAttribute 구현 -- loginFailureHandler에서 session에 flashAttribute를 담는다. -- redirect되는 controller에서
+     * 필요한 처리를 완료한 이후 session의 flashAttribute를 삭제한다.
      */
     HttpSession session = request.getSession();
 

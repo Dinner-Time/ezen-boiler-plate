@@ -24,7 +24,8 @@
             <form id="loginForm">
               <!-- 회사 로고 -->
               <div class="logo-img mb-5">
-                <img src="/resources/images/logo/adwinner_login_logo.png" alt="" />
+                <!-- <img src="/resources/images/logo/adwinner_login_logo.png" alt="" /> -->
+                공간케이블
               </div>
 
               <!-- 아이디 입력칸 -->

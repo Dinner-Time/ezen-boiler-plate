@@ -1,4 +1,6 @@
-package com.ezen.boilerplate.mes.manage.user.domain;
+package com.ezen.boilerplate.mes.manage.user.domain.repository;
+
+import com.ezen.boilerplate.mes.manage.user.domain.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

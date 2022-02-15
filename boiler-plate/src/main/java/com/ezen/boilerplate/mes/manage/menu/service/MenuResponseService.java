@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.ezen.boilerplate.mes.manage.menu.domain.Menu;
-import com.ezen.boilerplate.mes.manage.menu.domain.MenuRepository;
+import com.ezen.boilerplate.mes.manage.menu.domain.entity.Menu;
+import com.ezen.boilerplate.mes.manage.menu.domain.repository.MenuRepository;
 import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.DetailMenuDTO;
 import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.LeveledMenuDTO;
 import com.ezen.boilerplate.mes.manage.menu.service.DTO.response.ListOfMenuDTO;
@@ -62,8 +62,8 @@ public class MenuResponseService {
     public Map<String, List<LeveledMenuDTO>> leveledMenuList() {
         Map<String, List<LeveledMenuDTO>> result = new HashMap<String, List<LeveledMenuDTO>>();
 
-        List<Menu> parentsEntity = menuRepository.findByParentMenuIsNullOrderByMenuOrder();
-        List<Menu> childrenEntity = menuRepository.findByParentMenuIsNotNullOrderByMenuOrder();
+        List<Menu> parentsEntity = menuRepository.findByMasterMenuIsNullOrderByMenuOrder();
+        List<Menu> childrenEntity = menuRepository.findByMasterMenuIsNotNullOrderByMenuOrder();
 
         List<LeveledMenuDTO> parentsDTO = new ArrayList<LeveledMenuDTO>();
         List<LeveledMenuDTO> childrenDTO = new ArrayList<LeveledMenuDTO>();
@@ -100,7 +100,7 @@ public class MenuResponseService {
      */
     public List<ListOfMenuDTO> findAll() {
 
-        List<Menu> entities = menuRepository.findByParentMenuIsNotNullOrderByMenuOrder();
+        List<Menu> entities = menuRepository.findByMasterMenuIsNotNullOrderByMenuOrder();
 
         List<ListOfMenuDTO> dtos = new ArrayList<ListOfMenuDTO>();
 

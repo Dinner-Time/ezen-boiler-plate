@@ -3,9 +3,6 @@ package com.ezen.boilerplate.mes.standard.commonCode.domain.entity;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.ezen.boilerplate.common.domain.BaseTimeEntity;
@@ -45,12 +42,6 @@ public class DetailCode extends BaseTimeEntity {
 
     @EmbeddedId
     private DetailCodeId id;
-
-    // 연관관계 매핑
-    @MapsId("masterCodeId")
-    @ManyToOne
-    @JoinColumn(name = "MASTER_CODE_ID")
-    private MasterCode masterCode;
 
     // 코드 이름
     @Column(name = "CODE_NM", nullable = false)

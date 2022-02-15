@@ -1,7 +1,6 @@
 package com.ezen.boilerplate.mes.standard.commonCode.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.ezen.boilerplate.mes.standard.commonCode.domain.entity.CodeGroup;
 import com.ezen.boilerplate.mes.standard.commonCode.domain.entity.DetailCode;
@@ -55,7 +54,7 @@ public class CommonCodeRequest {
                 .codeId(dto.getCodeId()) //
                 .codeNm(dto.getCodeNm()) //
                 .codeDesc(dto.getCodeDesc()) //
-                .isEnabled(dto.getIsEnabled()) //
+                .useYn(dto.getIsEnabled()) //
                 .build();
         codeCategoryRepository.save(category);
 
@@ -66,17 +65,12 @@ public class CommonCodeRequest {
      * 
      */
     public int saveMaster(SaveCodeDTO dto) {
-        Optional<CodeGroup> category = codeCategoryRepository.findById(dto.getParentCode());
-
-        if (!category.isPresent()) {
-            return FAIL;
-        }
 
         MasterCode masterCode = MasterCode.builder() //
                 .codeId(dto.getCodeId()) //
                 .codeNm(dto.getCodeNm()) //
                 .codeDesc(dto.getCodeDesc()) //
-                .codeGroup(category.get()) //
+                .codeGroup(dto.getParentCode()) //
                 .isEnabled(dto.getIsEnabled()) //
                 .build();
         masterCodeRepository.save(masterCode);
@@ -90,17 +84,11 @@ public class CommonCodeRequest {
     public int saveDetail(List<SaveCodeDTO> dtoList) {
 
         for (SaveCodeDTO dto : dtoList) {
-            Optional<MasterCode> masterCode = masterCodeRepository.findById(dto.getParentCode());
-
-            if (!masterCode.isPresent()) {
-                return FAIL;
-            }
 
             DetailCode detailCode = DetailCode.builder() //
                     .id(new DetailCodeId(dto.getCodeId(), dto.getParentCode())) //
                     .codeNm(dto.getCodeNm()) //
                     .codeDesc(dto.getCodeDesc()) //
-                    .masterCode(masterCode.get()) //
                     .isEnabled(dto.getIsEnabled()) //
                     .build();
             detailCodeRepository.save(detailCode);
